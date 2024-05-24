@@ -1,3 +1,4 @@
+"use client";
 import { ReactNode } from "react";
 import { theme } from "../theme/theme";
 import { ThemeProvider } from "@mui/material";
