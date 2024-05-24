@@ -5,13 +5,12 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
   Container,
   Typography,
 } from "@mui/material";
 import volunteersImage1 from "@/assets/landing_page/volunteers/volunteers_1.jpg";
 import volunteersImage2 from "@/assets/landing_page/volunteers/volunteers_2.jpg";
-import volunteersImage3 from "@/assets/landing_page/volunteers/volunteers_3.jpg";
+import volunteersImage3 from "@/assets/landing_page/volunteers/team_9.jpg";
 import Image from "next/image";
 import facebookIcon from "@/assets/landing_page/facebook.png";
 import linkedinIcon from "@/assets/landing_page/linkedin.png";

@@ -1,5 +1,4 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
-import backgroundImage from "../../../../assets/landing_page/home_1_slider_1.jpg";
 
 const HeroSection = () => {
   return (
