@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <Container>
       <Stack
-        py={2}
+        py={3}
         direction="row"
         justifyContent="space-between"
         alignItems="center"
