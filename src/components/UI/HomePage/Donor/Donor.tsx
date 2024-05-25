@@ -90,7 +90,9 @@ const Donor = async () => {
                     </Box>
                   </Typography>
                   <Box pt={1}>
-                    <Button>Details</Button>
+                    <Button style={{ padding: "8px 12px", fontSize: "16px" }}>
+                      More
+                    </Button>
                   </Box>
                 </Box>
               </Box>

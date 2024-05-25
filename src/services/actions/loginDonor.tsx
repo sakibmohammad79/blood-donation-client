@@ -2,6 +2,7 @@
 import { FieldValues } from "react-hook-form";
 import { setToLocalStorage } from "@/utils/localStorage";
 import { authKey } from "@/constant";
+import { storeUserInfo } from "../authService";
 
 export const loginDonor = async (data: FieldValues) => {
   const res = await fetch(
@@ -17,9 +18,9 @@ export const loginDonor = async (data: FieldValues) => {
   );
   const userInfo = await res.json();
 
-  if (userInfo?.data?.accessToken) {
-    setToLocalStorage(authKey, userInfo?.data?.accessToken);
-  }
+  // if (userInfo?.data?.accessToken) {
+  //   storeUserInfo(userInfo?.data?.accessToken);
+  // }
 
   return userInfo;
 };
