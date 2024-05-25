@@ -2,30 +2,44 @@ import { TMeta } from "@/types/common";
 import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
-const donorApi = baseApi.injectEndpoints({
+const requestApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    //     createDoctor: build.mutation({
-    //       query: (data) => ({
-    //         url: "/user/create-doctor",
-    //         method: "POST",
-    //         contentType: "multipart/form-data",
-    //         data,
-    //       }),
-    //       invalidatesTags: [tagTypes.doctor],
-    //     }),
-    getAllDonors: build.query({
+    createBloodRequest: build.mutation({
+      query: (data) => ({
+        url: "/request",
+        method: "POST",
+        contentType: "application/json",
+        data,
+      }),
+      invalidatesTags: [tagTypes.request],
+    }),
+    getAllMyBloodRequest: build.query({
       query: (arg: Record<string, any>) => ({
-        url: "/donor",
+        url: "/request/my",
         method: "GET",
         params: arg,
       }),
       transformResponse: (response: any, meta: TMeta) => {
         return {
-          donor: response,
+          myRequest: response,
           meta,
         };
       },
-      providesTags: [tagTypes.donor],
+      providesTags: [tagTypes.request],
+    }),
+    getAllOfferedMeRequest: build.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/request/me",
+        method: "GET",
+        params: arg,
+      }),
+      transformResponse: (response: any, meta: TMeta) => {
+        return {
+          requestMe: response,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.request],
     }),
     // getSingleDoctor: build.query({
     //   query: (id: string) => ({
@@ -52,4 +66,8 @@ const donorApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllDonorsQuery } = donorApi;
+export const {
+  useCreateBloodRequestMutation,
+  useGetAllMyBloodRequestQuery,
+  useGetAllOfferedMeRequestQuery,
+} = requestApi;

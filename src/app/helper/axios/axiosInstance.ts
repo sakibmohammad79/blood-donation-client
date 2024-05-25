@@ -1,6 +1,7 @@
 import { authKey } from "@/constant";
 import { IGenericErrorResponse, TSuccessResponse } from "@/types/common";
-import { getFromLocalStorage } from "@/utils/localStorage";
+
+import { getFromLocalStorage, setToLocalStorage } from "@/utils/localStorage";
 import axios from "axios";
 
 const instance = axios.create();
@@ -43,22 +44,24 @@ instance.interceptors.response.use(
   async function (error) {
     //const config = error.config;
 
-    // if (error?.response?.status === 500 ) {
-    //   const res = await getNewAccessToke();
+    // if (error?.response?.status === 500 && !config.sent) {
+    //   config.sent = true;
+    //   const res = await getNewAccessToken();
     //   const accessToken = res?.data?.accessToken;
     //   config.headers["Authorization"] = accessToken;
     //   setToLocalStorage(authKey, accessToken);
     //   setAccessToken(accessToken);
     //   return instance(config);
-    // } else {
+    // }
+    // else {
     const responseObject: IGenericErrorResponse = {
       statusCode: error?.response?.data?.statusCode || 500,
       message: error?.response?.data?.message || "Something went wrong!",
       errorMessages: error?.response?.data?.message,
     };
     return responseObject;
-    //}
   }
+  //}
 );
 
 export { instance };

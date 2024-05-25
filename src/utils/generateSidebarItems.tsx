@@ -53,6 +53,16 @@ export const drawerItems = (role: UserRole) => {
           title: "All Donor",
           path: `${role}/all-donors`,
           icon: HealingIcon,
+        },
+        {
+          title: "My Request",
+          path: `${role}/my-request`,
+          icon: HealingIcon,
+        },
+        {
+          title: "Request Me",
+          path: `${role}/request-me`,
+          icon: HealingIcon,
         }
       );
       break;
