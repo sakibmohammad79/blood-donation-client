@@ -41,25 +41,23 @@ instance.interceptors.response.use(
   },
 
   async function (error) {
-    const config = error.config;
+    //const config = error.config;
 
-    // if (error?.response?.status === 500 && !config.sent) {
-    //   config.sent = true;
-
-    const accessToken = localStorage.getItem(authKey);
-    if (accessToken) {
-      config.headers["Authorization"] = accessToken;
-      //   setToLocalStorage(authKey, accessToken);
-      //   setAccessToken(accessToken);
-      return instance(config);
-    } else {
-      const responseObject: IGenericErrorResponse = {
-        statusCode: error?.response?.data?.statusCode || 500,
-        message: error?.response?.data?.message || "Something went wrong!",
-        errorMessages: error?.response?.data?.message,
-      };
-      return responseObject;
-    }
+    // if (error?.response?.status === 500 ) {
+    //   const res = await getNewAccessToke();
+    //   const accessToken = res?.data?.accessToken;
+    //   config.headers["Authorization"] = accessToken;
+    //   setToLocalStorage(authKey, accessToken);
+    //   setAccessToken(accessToken);
+    //   return instance(config);
+    // } else {
+    const responseObject: IGenericErrorResponse = {
+      statusCode: error?.response?.data?.statusCode || 500,
+      message: error?.response?.data?.message || "Something went wrong!",
+      errorMessages: error?.response?.data?.message,
+    };
+    return responseObject;
+    //}
   }
 );
 
