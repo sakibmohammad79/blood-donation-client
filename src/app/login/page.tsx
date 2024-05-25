@@ -28,7 +28,7 @@ const LoginPage = () => {
 
         localStorage.setItem(authKey, token);
         toast.success("User loggedIn success!");
-        router.push("/");
+        router.push("/dashboard");
       } else {
         setError(res?.message);
       }
