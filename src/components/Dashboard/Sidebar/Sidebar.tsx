@@ -15,7 +15,6 @@ import { getuserInfo } from "@/services/authService";
 
 const Sidebar = () => {
   const [userRole, setUserRole] = useState("");
-  console.log(userRole);
 
   useEffect(() => {
     const { role } = getuserInfo() as any;
@@ -36,8 +35,12 @@ const Sidebar = () => {
         href={"/"}
       >
         {/* <Image src={assets.svgs.logo} alt="logo" height={40} width={40} /> */}
-        <Typography variant="h6" component="h6">
-          BGC HealthCare
+        <Typography variant="h5" component="h5" fontWeight={500}>
+          <Box component="span" color="primary.main">
+            {" "}
+            BLOOD
+          </Box>{" "}
+          CARE
         </Typography>
       </Stack>
       <List>

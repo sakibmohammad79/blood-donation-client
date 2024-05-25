@@ -10,6 +10,7 @@ const AuthButton = () => {
   const handleLogOut = () => {
     removeUser();
     router.push("/");
+    router.refresh();
   };
   return (
     <>

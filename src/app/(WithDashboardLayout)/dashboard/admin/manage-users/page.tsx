@@ -1,9 +1,9 @@
-const Page = () => {
+const ManageUsers = () => {
   return (
     <div>
-      <h2>This is Page component</h2>
+      <h2>This is ManageUsers component</h2>
     </div>
   );
 };
 
-export default Page;
+export default ManageUsers;

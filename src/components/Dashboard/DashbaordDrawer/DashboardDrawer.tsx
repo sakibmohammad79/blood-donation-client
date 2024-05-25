@@ -12,6 +12,7 @@ import { Avatar, Badge, Stack } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 // import AccountMenu from "../AccountMenu/AccountMenu";
 import Sidebar from "../Sidebar/Sidebar";
+import AccountMenu from "../AccountMenu/AccountMenu";
 
 const drawerWidth = 240;
 
@@ -94,7 +95,7 @@ export default function DashboardDrawer({
               </Badge>
               {/* <Avatar alt={user?.name} src={user?.profilePhoto}></Avatar> */}
               <Avatar alt={"anme"} src={"name"}></Avatar>
-              {/* <AccountMenu /> */}
+              <AccountMenu />
             </Stack>
           </Box>
         </Toolbar>
