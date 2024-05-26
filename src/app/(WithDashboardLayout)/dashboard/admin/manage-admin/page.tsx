@@ -21,10 +21,12 @@ const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 const ManageAdmin = () => {
   const { data: admins, isLoading } = useGetAllAdminQuery({});
 
-  const [donorStatusUpdate] = useAdminStatusUpdateMutation();
+  console.log(admins);
+
+  const [adminStatusUpdate] = useAdminStatusUpdateMutation();
 
   const handleStatusChange = async (id: string, value: string) => {
-    await donorStatusUpdate({ id, value });
+    await adminStatusUpdate({ id, value });
   };
 
   const rows =

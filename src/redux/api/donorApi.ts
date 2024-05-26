@@ -18,6 +18,13 @@ const donorApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.donor],
     }),
+    getSingleDonor: build.query({
+      query: (id) => ({
+        url: `/donor/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.donor],
+    }),
     donorStatusUpdate: build.mutation({
       query: (data) => ({
         url: `/donor/status/${data.id}?status=${data.value}`,
@@ -28,4 +35,8 @@ const donorApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllDonorsQuery, useDonorStatusUpdateMutation } = donorApi;
+export const {
+  useGetAllDonorsQuery,
+  useDonorStatusUpdateMutation,
+  useGetSingleDonorQuery,
+} = donorApi;

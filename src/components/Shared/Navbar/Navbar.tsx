@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <Container>
       <Stack
-        py={3}
+        py={2}
         direction="row"
         justifyContent="space-between"
         alignItems="center"
@@ -28,14 +28,14 @@ const Navbar = () => {
           </Box>
         </Typography>
         <Stack direction="row" justifyContent="space-between" gap={4}>
-          <Typography component={Link} href="/">
-            Home
+          <Typography component={Link} href="/" fontWeight={600}>
+            HOME
           </Typography>
-          <Typography component={Link} href="/">
-            About Us
+          <Typography component={Link} href="/" fontWeight={600}>
+            ABOUT
           </Typography>
-          <Typography component={Link} href="/">
-            Profile
+          <Typography component={Link} href="/" fontWeight={600}>
+            PROFILE
           </Typography>
         </Stack>
 

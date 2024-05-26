@@ -1,6 +1,7 @@
 "use server";
 import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 
 const Donor = async () => {
   const res = await fetch("http://localhost:5000/api/v1/donor", {
@@ -31,7 +32,8 @@ const Donor = async () => {
             >
               <Box>
                 <Image
-                  src={donor?.photo}
+                  //src={donor?.photo}
+                  src="https://i.postimg.cc/BnmsxfQ5/pexels-designecologist-1779487.jpg"
                   alt="donotImage"
                   height={140}
                   width={220}
@@ -80,7 +82,7 @@ const Donor = async () => {
                       {donor?.location}
                     </Box>
                   </Typography>
-                  <Box pt={1}>
+                  <Box pt={1} component={Link} href={`/donor/${donor.id}`}>
                     <Button style={{ padding: "8px 12px", fontSize: "16px" }}>
                       More
                     </Button>
