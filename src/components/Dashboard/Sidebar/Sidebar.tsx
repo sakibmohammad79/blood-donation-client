@@ -5,11 +5,8 @@ import Link from "next/link";
 
 import { useEffect, useState } from "react";
 import SidebarItem from "./SideItem";
-import { USER_ROLE } from "@/constant/role";
 
 import { UserRole } from "@/types/common";
-import { getFromLocalStorage } from "@/utils/localStorage";
-import { authKey } from "@/constant";
 import { drawerItems } from "@/utils/generateSidebarItems";
 import { getuserInfo } from "@/services/authService";
 
@@ -23,7 +20,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <Box>
+    <Box sx={{ background: "#202124", height: "100%", color: "#FFFFFF" }}>
       <Stack
         direction="row"
         justifyContent="center"
@@ -31,7 +28,7 @@ const Sidebar = () => {
         mt={1}
         py={1}
         gap={1}
-        component={Link}
+        // component={Link}
         href={"/"}
       >
         {/* <Image src={assets.svgs.logo} alt="logo" height={40} width={40} /> */}

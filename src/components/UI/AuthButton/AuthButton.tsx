@@ -19,7 +19,7 @@ const AuthButton = () => {
       {userInfo?.userId ? (
         <Box>
           <Box component={Link} href="/dashboard">
-            <IconButton size="large" sx={{ mr: 2, background: "gray" }}>
+            <IconButton size="large" sx={{ mr: 2, background: "Gray" }}>
               <AccountCircle />
             </IconButton>
           </Box>
