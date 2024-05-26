@@ -36,6 +36,13 @@ const requestApi = baseApi.injectEndpoints({
 
       providesTags: [tagTypes.request],
     }),
+    getSingleBloodRequestReceiver: build.query({
+      query: (id) => ({
+        url: `/request/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.request],
+    }),
     offeredMeRequestUpdate: build.mutation({
       query: (data) => ({
         url: `/request/status/${data.id}?status=${data.value}`,
@@ -51,4 +58,5 @@ export const {
   useGetAllOfferedMeRequestQuery,
   useGetAllMyBloodRequestQuery,
   useOfferedMeRequestUpdateMutation,
+  useGetSingleBloodRequestReceiverQuery,
 } = requestApi;

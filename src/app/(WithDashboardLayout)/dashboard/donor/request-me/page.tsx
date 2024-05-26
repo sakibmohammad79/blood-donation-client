@@ -10,6 +10,7 @@ import {
   Select,
   Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
@@ -23,7 +24,6 @@ const BloodRequestMe = () => {
   const [offeredMeRequestUpdate] = useOfferedMeRequestUpdateMutation();
 
   const handleStatusChange = async (id: string, value: string) => {
-    console.log(id);
     await offeredMeRequestUpdate({ id, value });
   };
 
@@ -37,9 +37,13 @@ const BloodRequestMe = () => {
           return {
             ...requestMe,
             status,
+            contactNumber: requestMe.contactNumber,
+            location: requestMe.location,
+            hospitalName: requestMe.hospitalName,
           };
         })
       : [];
+
   const columns: GridColDef[] = [
     { field: "requesterName", headerName: "Requester Name", flex: 1 },
     { field: "bloodType", headerName: "Blood Type", flex: 1 },
@@ -47,24 +51,40 @@ const BloodRequestMe = () => {
     {
       field: "status",
       headerName: "Status",
-      flex: 1,
+      flex: 5,
       renderCell: (params) => (
-        <Select
-          sx={{ width: "150px" }}
-          value={params.row.status}
-          onChange={(event) =>
-            handleStatusChange(params.row.requesterId, event.target.value)
-          }
-        >
-          {allowedStatuses.map((status) => (
-            <MenuItem key={status} value={status}>
-              {status}
-            </MenuItem>
-          ))}
-        </Select>
+        <>
+          <Select
+            sx={{ width: "150px" }}
+            value={params.row.status}
+            onChange={(event) =>
+              handleStatusChange(params.row.requesterId, event.target.value)
+            }
+          >
+            {allowedStatuses.map((status) => (
+              <MenuItem key={status} value={status}>
+                {status}
+              </MenuItem>
+            ))}
+          </Select>
+          {params.row.status === "APPROVED" && (
+            <>
+              <Typography variant="body2" sx={{ ml: 2 }}>
+                Contact: {params.row.contactNumber}
+              </Typography>
+              <Typography variant="body2" sx={{ ml: 2 }}>
+                Hospital: {params.row.hospitalName}
+              </Typography>
+              <Typography variant="body2" sx={{ ml: 2 }}>
+                location: {params.row.location}
+              </Typography>
+            </>
+          )}
+        </>
       ),
     },
   ];
+
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center">

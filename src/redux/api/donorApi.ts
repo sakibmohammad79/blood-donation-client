@@ -4,15 +4,6 @@ import { baseApi } from "./baseApi";
 
 const donorApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    //     createDoctor: build.mutation({
-    //       query: (data) => ({
-    //         url: "/user/create-doctor",
-    //         method: "POST",
-    //         contentType: "multipart/form-data",
-    //         data,
-    //       }),
-    //       invalidatesTags: [tagTypes.doctor],
-    //     }),
     getAllDonors: build.query({
       query: (arg: Record<string, any>) => ({
         url: "/donor",
@@ -27,7 +18,6 @@ const donorApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.donor],
     }),
-
     donorStatusUpdate: build.mutation({
       query: (data) => ({
         url: `/donor/status/${data.id}?status=${data.value}`,

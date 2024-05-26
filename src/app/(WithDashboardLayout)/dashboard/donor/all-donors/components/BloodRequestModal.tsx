@@ -26,7 +26,6 @@ const BloodRequestModal = ({ open, setOpen, id }: TModalProps) => {
 
     try {
       const res = await createBloodRequest(values).unwrap();
-      console.log(res);
       if (res.id) {
         toast.success("Blood request send successfully!");
         setOpen(false);
