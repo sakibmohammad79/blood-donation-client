@@ -4,15 +4,6 @@ import { baseApi } from "./baseApi";
 
 const adminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    //     createDoctor: build.mutation({
-    //       query: (data) => ({
-    //         url: "/user/create-doctor",
-    //         method: "POST",
-    //         contentType: "multipart/form-data",
-    //         data,
-    //       }),
-    //       invalidatesTags: [tagTypes.doctor],
-    //     }),
     getAllAdmin: build.query({
       query: (arg: Record<string, any>) => ({
         url: "/admin",
@@ -26,6 +17,13 @@ const adminApi = baseApi.injectEndpoints({
         };
       },
       providesTags: [tagTypes.admin],
+    }),
+    adminStatusUpdate: build.mutation({
+      query: (data) => ({
+        url: `/admin/status/${data.id}?status=${data.value}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: [tagTypes.user, tagTypes.admin],
     }),
     // getSingleDoctor: build.query({
     //   query: (id: string) => ({
@@ -52,4 +50,4 @@ const adminApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllAdminQuery } = adminApi;
+export const { useGetAllAdminQuery, useAdminStatusUpdateMutation } = adminApi;

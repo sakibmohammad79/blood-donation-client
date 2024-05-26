@@ -1,18 +1,40 @@
 "use client";
-import { useGetAllDonorsQuery } from "@/redux/api/donorApi";
-import { Box, IconButton, Stack, TextField } from "@mui/material";
+import {
+  useDonorStatusUpdateMutation,
+  useGetAllDonorsQuery,
+} from "@/redux/api/donorApi";
+import {
+  Box,
+  IconButton,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
+const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
+
 const ManageDonor = () => {
   const { data: donors, isLoading } = useGetAllDonorsQuery({});
+  const [donorStatusUpdate, { data }] = useDonorStatusUpdateMutation();
+
+  const handleStatusChange = async (id: string, value: string) => {
+    await donorStatusUpdate({ id, value });
+  };
 
   const rows =
-    donors?.donor.map((donor: any) => ({
-      ...donor,
-      status: donor.user.status,
-    })) || [];
+    donors?.donor.map((donor: any) => {
+      const status = allowedStatuses.includes(donor.user.status)
+        ? donor.user.status
+        : "ACTIVE";
+      return {
+        ...donor,
+        status,
+      };
+    }) || [];
 
   const columns: GridColDef[] = [
     { field: "name", headerName: "Name", flex: 1 },
@@ -21,7 +43,26 @@ const ManageDonor = () => {
     { field: "location", headerName: "Location", flex: 1 },
     { field: "contactNumber", headerName: "Contact Number", flex: 1 },
     { field: "availability", headerName: "Availability", flex: 1 },
-    { field: "status", headerName: "status", flex: 1 },
+    {
+      field: "status",
+      headerName: "Status",
+      flex: 1,
+      renderCell: (params) => (
+        <Select
+          sx={{ width: "150px" }}
+          value={params.row.status}
+          onChange={(event) =>
+            handleStatusChange(params.row.id, event.target.value)
+          }
+        >
+          {allowedStatuses.map((status) => (
+            <MenuItem key={status} value={status}>
+              {status}
+            </MenuItem>
+          ))}
+        </Select>
+      ),
+    },
   ];
   return (
     <Box>
