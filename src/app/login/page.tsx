@@ -11,6 +11,7 @@ import { loginDonor } from "@/services/actions/loginDonor";
 import PHForm from "@/Form/PHForm";
 import PHInput from "@/Form/PHInput";
 import { authKey } from "@/constant";
+import { storeUserInfo } from "@/services/authService";
 
 const validationSchema = z.object({
   email: z.string().email("Enter a valid email address!"),
@@ -25,8 +26,7 @@ const LoginPage = () => {
       const res = await loginDonor(data);
       if (res?.data?.accessToken) {
         const token = res?.data?.accessToken;
-
-        localStorage.setItem(authKey, token);
+        storeUserInfo(token);
         toast.success("User loggedIn success!");
         router.push("/dashboard");
       } else {

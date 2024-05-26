@@ -14,6 +14,7 @@ import { authKey, genderItem } from "@/constant";
 import PHForm from "@/Form/PHForm";
 import PHInput from "@/Form/PHInput";
 import { PHSelect } from "@/Form/PHSelect";
+import { storeUserInfo } from "@/services/authService";
 
 // const donorRegisterValidationSchema = z.object({
 //   password: z.string().min(6, "Password must be at least 6 charcters!"),
@@ -61,8 +62,10 @@ const RegisterPage = () => {
         });
         // console.log("login", result);
         if (result?.data?.accessToken) {
-          setToLocalStorage(authKey, result?.data?.accessToken);
-          router.push("/");
+          const token = result?.data?.accessToken;
+          storeUserInfo(token);
+          toast.success("User loggedIn success!");
+          router.push("/dashboard");
         }
       } else {
         setError(res.message);

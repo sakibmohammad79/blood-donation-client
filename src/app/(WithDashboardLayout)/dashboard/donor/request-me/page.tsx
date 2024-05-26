@@ -1,40 +1,69 @@
 "use client";
-import { useGetAllOfferedMeRequestQuery } from "@/redux/api/requestApi";
-import { Box, CircularProgress, Stack, TextField } from "@mui/material";
+import {
+  useGetAllOfferedMeRequestQuery,
+  useOfferedMeRequestUpdateMutation,
+} from "@/redux/api/requestApi";
+import {
+  Box,
+  CircularProgress,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+} from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
+const allowedStatuses = ["APPROVED", "REJECTED", "PENDING"];
+
 const BloodRequestMe = () => {
-  const { data, isLoading } = useGetAllOfferedMeRequestQuery({});
-  console.log(data);
+  const { data: offeredRequest, isLoading } = useGetAllOfferedMeRequestQuery(
+    {}
+  );
+
+  const [offeredMeRequestUpdate] = useOfferedMeRequestUpdateMutation();
+
+  const handleStatusChange = async (id: string, value: string) => {
+    console.log(id);
+    await offeredMeRequestUpdate({ id, value });
+  };
+
+  const rows =
+    Array.isArray(offeredRequest) && offeredRequest.length > 0
+      ? offeredRequest.map((requestMe: any) => {
+          const status = allowedStatuses.includes(requestMe.status)
+            ? requestMe.status
+            : "PENDING";
+
+          return {
+            ...requestMe,
+            status,
+          };
+        })
+      : [];
   const columns: GridColDef[] = [
-    { field: "requesterName", headerName: "Name", flex: 1 },
+    { field: "requesterName", headerName: "Requester Name", flex: 1 },
     { field: "bloodType", headerName: "Blood Type", flex: 1 },
     { field: "requestDate", headerName: "Request Date", flex: 1 },
-    { field: "status", headerName: "Status", flex: 1 },
-    // { field: "contactNumber", headerName: "Contact Number", flex: 1 },
-    // { field: "availability", headerName: "Availability", flex: 1 },
-    // {
-    //   field: "action",
-    //   headerName: "Request",
-    //   flex: 1,
-    //   headerAlign: "center",
-    //   align: "center",
-    //   renderCell: ({ row }) => {
-    //     return (
-    //       <IconButton>
-    //         <BloodtypeIcon
-    //           style={{ color: "primary.main" }}
-    //           onClick={() => handleClick(row.id)}
-    //         ></BloodtypeIcon>
-    //         <BloodRequestModal
-    //           open={isModalOpen}
-    //           setOpen={setIsModalOpen}
-    //           id={id}
-    //         ></BloodRequestModal>
-    //       </IconButton>
-    //     );
-    //   },
-    // },
+    {
+      field: "status",
+      headerName: "Status",
+      flex: 1,
+      renderCell: (params) => (
+        <Select
+          sx={{ width: "150px" }}
+          value={params.row.status}
+          onChange={(event) =>
+            handleStatusChange(params.row.requesterId, event.target.value)
+          }
+        >
+          {allowedStatuses.map((status) => (
+            <MenuItem key={status} value={status}>
+              {status}
+            </MenuItem>
+          ))}
+        </Select>
+      ),
+    },
   ];
   return (
     <Box>
@@ -43,7 +72,7 @@ const BloodRequestMe = () => {
       </Stack>
       {!isLoading ? (
         <Box my={2} justifyContent="center" alignItems="center">
-          <DataGrid rows={data?.requestMe} columns={columns} hideFooter />
+          <DataGrid rows={rows} columns={columns} hideFooter />
         </Box>
       ) : (
         <Box
@@ -62,3 +91,11 @@ const BloodRequestMe = () => {
 };
 
 export default BloodRequestMe;
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjMGFhYzI3ZC02NmU5LTRkODItOWMxNS1iZWU0NGIzODY2YjEiLCJlbWFpbCI6InRheXViQGdtYWlsLmNvbSIsInJvbGUiOiJET05PUiIsImlhdCI6MTcxNjcxNjIwMiwiZXhwIjoxNzE3MTQ4MjAyfQ.eUB4bYu6GKdd1BYk6GIWN2UqQVQ9ZkrOhD6IlQJmIL0 post
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYmQ5YTE0ZC1jZjc1LTRiNmUtYjQ3My0wMGFkNWI4ODNiMWIiLCJlbWFpbCI6InRheXViQGdtYWlsLmNvbSIsInJvbGUiOiJET05PUiIsImlhdCI6MTcxNjU3NzE2NiwiZXhwIjoxNzE3MDA5MTY2fQ.nKg5btOtto7ByPyFXgYkwM813-x7Y-rt3sPKGaQIvtg
+
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYTljOTVhYi03MDYzLTRlZjctYWJkNi1hNjgzMjAxYzdiZDQiLCJlbWFpbCI6InNhbWlAZ21haWwuY29tIiwicm9sZSI6IkRPTk9SIiwiaWF0IjoxNzE2NzE3MDY4LCJleHAiOjE3MTcxNDkwNjh9.rk90PncHmY9vj3q9_V0_jW05d5XGfqEoVCSlxcuKNpw
+
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYTljOTVhYi03MDYzLTRlZjctYWJkNi1hNjgzMjAxYzdiZDQiLCJlbWFpbCI6InNhbWlAZ21haWwuY29tIiwicm9sZSI6IkRPTk9SIiwiaWF0IjoxNzE2NzA5OTQxLCJleHAiOjE3MTcxNDE5NDF9.zc6BCvYkzjaSgpWffDIeMzlDYIhWU5hTCAgq_laCe2w

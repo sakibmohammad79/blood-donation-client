@@ -33,41 +33,22 @@ const requestApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: any, meta: TMeta) => {
-        return {
-          requestMe: response,
-          meta,
-        };
-      },
+
       providesTags: [tagTypes.request],
     }),
-    // getSingleDoctor: build.query({
-    //   query: (id: string) => ({
-    //     url: `/doctor/${id}`,
-    //     method: "GET",
-    //   }),
-    //   providesTags: [tagTypes.doctor],
-    // }),
-    // deleteDoctor: build.mutation({
-    //   query: (id: string) => ({
-    //     url: `/doctor/soft/${id}`,
-    //     method: "PATCH",
-    //   }),
-    //   invalidatesTags: [tagTypes.doctor],
-    // }),
-    // updateDoctor: build.mutation({
-    //   query: (data) => ({
-    //     url: `/doctor/${data.id}`,
-    //     method: "PATCH",
-    //     data: data.body,
-    //   }),
-    //   invalidatesTags: [tagTypes.doctor, tagTypes.user],
-    // }),
+    offeredMeRequestUpdate: build.mutation({
+      query: (data) => ({
+        url: `/request/status/${data.id}?status=${data.value}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: [tagTypes.request],
+    }),
   }),
 });
 
 export const {
   useCreateBloodRequestMutation,
-  useGetAllMyBloodRequestQuery,
   useGetAllOfferedMeRequestQuery,
+  useGetAllMyBloodRequestQuery,
+  useOfferedMeRequestUpdateMutation,
 } = requestApi;

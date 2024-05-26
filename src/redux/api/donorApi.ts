@@ -27,20 +27,7 @@ const donorApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.donor],
     }),
-    // getSingleDoctor: build.query({
-    //   query: (id: string) => ({
-    //     url: `/doctor/${id}`,
-    //     method: "GET",
-    //   }),
-    //   providesTags: [tagTypes.doctor],
-    // }),
-    // deleteDoctor: build.mutation({
-    //   query: (id: string) => ({
-    //     url: `/doctor/soft/${id}`,
-    //     method: "PATCH",
-    //   }),
-    //   invalidatesTags: [tagTypes.doctor],
-    // }),
+
     donorStatusUpdate: build.mutation({
       query: (data) => ({
         url: `/donor/status/${data.id}?status=${data.value}`,

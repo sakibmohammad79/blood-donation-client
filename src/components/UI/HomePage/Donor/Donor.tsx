@@ -1,15 +1,5 @@
 "use server";
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Container,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 
 const Donor = async () => {
@@ -20,6 +10,7 @@ const Donor = async () => {
   });
 
   const { data: allDonor } = await res.json();
+  console.log(allDonor);
 
   return (
     <Box py={16}>
@@ -31,7 +22,7 @@ const Donor = async () => {
       </Box>
 
       <Grid container spacing={4} justifyContent="center" sx={{ p: 8 }}>
-        {allDonor.map((donor: any) => (
+        {allDonor?.map((donor: any) => (
           <Grid key={donor?.id} item>
             <Card
               sx={{
