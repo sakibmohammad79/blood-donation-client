@@ -20,7 +20,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <Box sx={{ background: "#202124", height: "100%", color: "#FFFFFF" }}>
+    <Box sx={{ height: "100%", background: "#242424" }}>
       <Stack
         direction="row"
         justifyContent="center"
@@ -28,7 +28,7 @@ const Sidebar = () => {
         mt={1}
         py={1}
         gap={1}
-        // component={Link}
+        component={Link}
         href={"/"}
       >
         {/* <Image src={assets.svgs.logo} alt="logo" height={40} width={40} /> */}

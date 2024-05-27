@@ -49,7 +49,7 @@ export default function DashboardDrawer({
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-          background: "#202124",
+          background: "#242424",
           boxShadow: 0,
           borderBottom: "1px solid lightgray",
         }}
