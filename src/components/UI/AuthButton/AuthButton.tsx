@@ -1,5 +1,5 @@
 import { getuserInfo, removeUser } from "@/services/authService";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Tooltip } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import IconButton from "@mui/material/IconButton";
@@ -19,9 +19,11 @@ const AuthButton = () => {
       {userInfo?.userId ? (
         <Box>
           <Box component={Link} href="/dashboard">
-            <IconButton size="large" sx={{ mr: 2, background: "Gray" }}>
-              <AccountCircle />
-            </IconButton>
+            <Tooltip title="Go to Dashboard">
+              <IconButton size="large" sx={{ mr: 2, background: "Gray" }}>
+                <AccountCircle />
+              </IconButton>
+            </Tooltip>
           </Box>
           <Button onClick={handleLogOut} color="error">
             Logout

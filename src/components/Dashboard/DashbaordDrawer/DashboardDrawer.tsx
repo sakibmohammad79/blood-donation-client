@@ -13,6 +13,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 // import AccountMenu from "../AccountMenu/AccountMenu";
 import Sidebar from "../Sidebar/Sidebar";
 import AccountMenu from "../AccountMenu/AccountMenu";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 
 const drawerWidth = 240;
 
@@ -39,7 +40,7 @@ export default function DashboardDrawer({
     }
   };
 
-  //   const { data: user, isLoading } = useGetSingleUserQuery({});
+  const { data: user, isLoading } = useGetSingleUserQuery({});
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -75,7 +76,7 @@ export default function DashboardDrawer({
           >
             <Box>
               <Typography variant="body2" color="gray" noWrap component="div">
-                {/* Hi,{isLoading ? "isLoading..." : ` ${user?.name}`} */}
+                Hi,{isLoading ? "isLoading..." : ` ${user?.name}`}
               </Typography>
               <Typography
                 variant="body2"
@@ -93,8 +94,8 @@ export default function DashboardDrawer({
                   <NotificationsNoneIcon color="action" />
                 </IconButton>
               </Badge>
-              {/* <Avatar alt={user?.name} src={user?.profilePhoto}></Avatar> */}
-              <Avatar alt={"anme"} src={"name"}></Avatar>
+              <Avatar alt={user?.name} src={user?.photo ?? user?.name}></Avatar>
+              {/* <Avatar alt={"anme"} src={"name"}></Avatar> */}
               <AccountMenu />
             </Stack>
           </Box>
