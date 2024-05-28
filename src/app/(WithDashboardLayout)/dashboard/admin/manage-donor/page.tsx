@@ -19,7 +19,8 @@ const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 
 const ManageDonor = () => {
   const { data: donors, isLoading } = useGetAllDonorsQuery({});
-  const [donorStatusUpdate, { data }] = useDonorStatusUpdateMutation();
+  console.log(donors);
+  const [donorStatusUpdate] = useDonorStatusUpdateMutation();
 
   const handleStatusChange = async (id: string, value: string) => {
     await donorStatusUpdate({ id, value });

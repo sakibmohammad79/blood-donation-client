@@ -21,8 +21,6 @@ const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 const ManageAdmin = () => {
   const { data: admins, isLoading } = useGetAllAdminQuery({});
 
-  console.log(admins);
-
   const [adminStatusUpdate] = useAdminStatusUpdateMutation();
 
   const handleStatusChange = async (id: string, value: string) => {

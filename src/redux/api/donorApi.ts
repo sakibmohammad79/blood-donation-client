@@ -32,6 +32,14 @@ const donorApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user, tagTypes.donor],
     }),
+    donorUpdate: build.mutation({
+      query: (data) => ({
+        url: `/donor/${data.id}`,
+        method: "PATCH",
+        data: data.body,
+      }),
+      invalidatesTags: [tagTypes.donor, tagTypes.user],
+    }),
   }),
 });
 
@@ -39,4 +47,5 @@ export const {
   useGetAllDonorsQuery,
   useDonorStatusUpdateMutation,
   useGetSingleDonorQuery,
+  useDonorUpdateMutation,
 } = donorApi;

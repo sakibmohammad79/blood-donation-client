@@ -19,13 +19,25 @@ const adminApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.admin],
     }),
     adminStatusUpdate: build.mutation({
-      query: (data) => ({
+      query: (data: any) => ({
         url: `/admin/status/${data.id}?status=${data.value}`,
         method: "PATCH",
       }),
       invalidatesTags: [tagTypes.user, tagTypes.admin],
     }),
+    adminUpdate: build.mutation({
+      query: (data) => ({
+        url: `/admin/${data.id}`,
+        method: "PATCH",
+        data: data.body,
+      }),
+      invalidatesTags: [tagTypes.admin, tagTypes.user],
+    }),
   }),
 });
 
-export const { useGetAllAdminQuery, useAdminStatusUpdateMutation } = adminApi;
+export const {
+  useGetAllAdminQuery,
+  useAdminStatusUpdateMutation,
+  useAdminUpdateMutation,
+} = adminApi;
