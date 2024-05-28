@@ -10,7 +10,6 @@ const StyledInformationBox = styled(Box)(({ theme }) => ({
   },
 }));
 const DonorInfo = ({ data }: any) => {
-  console.log(data);
   return (
     <Grid item xs={12} sm={12} md={8}>
       <Typography color="primary" component="h5" variant="h5" mb={1}>

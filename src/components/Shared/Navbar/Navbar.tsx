@@ -1,4 +1,6 @@
 "use client";
+import { authKey } from "@/constant";
+import { getuserInfo } from "@/services/authService";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -8,6 +10,7 @@ const Navbar = () => {
     () => import("@/components/UI/AuthButton/AuthButton"),
     { ssr: false }
   );
+
   return (
     <Container>
       <Stack
@@ -34,7 +37,11 @@ const Navbar = () => {
           <Typography component={Link} href="/about" fontWeight={600}>
             ABOUT
           </Typography>
-          <Typography component={Link} href="/" fontWeight={600}>
+          <Typography
+            component={Link}
+            href={`/dashboard/profile`}
+            fontWeight={600}
+          >
             PROFILE
           </Typography>
         </Stack>

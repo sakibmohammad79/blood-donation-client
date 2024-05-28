@@ -1,4 +1,5 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -32,7 +33,7 @@ const HeroSection = () => {
         <Typography variant="h5" component="h5">
           Donating blood not only saves the life also save donor’s lives.
         </Typography>
-        <Box pt={2}>
+        <Box pt={2} component={Link} href="/all-donor">
           <Button>Get Donor</Button>
         </Box>
       </Stack>

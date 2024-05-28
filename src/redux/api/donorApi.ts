@@ -36,7 +36,7 @@ const donorApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: `/donor/${data.id}`,
         method: "PATCH",
-        data: data.body,
+        data: data.data,
       }),
       invalidatesTags: [tagTypes.donor, tagTypes.user],
     }),

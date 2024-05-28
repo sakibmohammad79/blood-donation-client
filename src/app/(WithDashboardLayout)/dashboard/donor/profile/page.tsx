@@ -1,14 +1,18 @@
 "use client";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
-import { Box, CircularProgress, Grid } from "@mui/material";
+import { Box, Button, CircularProgress, Grid } from "@mui/material";
 import Image from "next/image";
 import DonorInfo from "./components/DonorInfo";
 import { useDonorUpdateMutation } from "@/redux/api/donorApi";
 import AutoFileUploader from "@/Form/AutoFileUploader";
 import { CloudUpload as CloudUploadIcon } from "@mui/icons-material";
+import DonorUpdateModal from "./components/DonorUpdateModal";
+import { useState } from "react";
+import EditIcon from "@mui/icons-material/Edit";
 
 const DonorProfile = () => {
-  const { data, isLoading } = useGetSingleUserQuery({});
+  const [isModalOpen, SetIsModalOpen] = useState(false);
+  const { data, isFetching } = useGetSingleUserQuery({});
   const [donorUpdate, { isLoading: isUploading }] = useDonorUpdateMutation();
 
   const fileUploadHandler = async (file: File) => {
@@ -75,7 +79,13 @@ const DonorProfile = () => {
               <CircularProgress />
             </Box>
           ) : (
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                mt: 2,
+              }}
+            >
               <AutoFileUploader
                 name="file"
                 label="choose your profile photo"
@@ -83,19 +93,22 @@ const DonorProfile = () => {
                 onFileUpload={fileUploadHandler}
                 variant="text"
               ></AutoFileUploader>
-              {/* <DoctorProfileUpdateModal
+              <DonorUpdateModal
                 id={data?.id}
                 open={isModalOpen}
                 setOpen={SetIsModalOpen}
-              ></DoctorProfileUpdateModal>
-              <Button
-                endIcon={<EditIcon />}
-                onClick={() => SetIsModalOpen(true)}
-              >
-                Update Profile
-              </Button> */}
+              ></DonorUpdateModal>
             </Box>
           )}
+          <Box sx={{ textAlign: "center", mt: 2 }}>
+            <Button
+              disabled={isFetching}
+              endIcon={<EditIcon />}
+              onClick={() => SetIsModalOpen(true)}
+            >
+              Update Profile
+            </Button>
+          </Box>
         </Grid>
         <DonorInfo data={data}></DonorInfo>
       </Grid>
