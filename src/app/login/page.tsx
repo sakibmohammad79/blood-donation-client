@@ -1,5 +1,13 @@
 "use client";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import Link from "next/link";
 import { SubmitHandler, FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -10,7 +18,7 @@ import { useState } from "react";
 import { loginDonor } from "@/services/actions/loginDonor";
 import PHForm from "@/Form/PHForm";
 import PHInput from "@/Form/PHInput";
-import { authKey } from "@/constant";
+
 import { storeUserInfo } from "@/services/authService";
 
 const validationSchema = z.object({
@@ -20,20 +28,25 @@ const validationSchema = z.object({
 
 const LoginPage = () => {
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    setIsLoading(true);
     try {
       const res = await loginDonor(data);
       if (res?.data?.accessToken) {
         const token = res?.data?.accessToken;
         storeUserInfo(token);
-        toast.success("User loggedIn success!");
+        toast.success("User logged in successfully!");
         router.push("/dashboard");
       } else {
         setError(res?.message);
       }
     } catch (error: any) {
       toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -63,21 +76,19 @@ const LoginPage = () => {
           </Box>
 
           {error && (
-            <>
-              <Box>
-                <Typography
-                  sx={{
-                    mb: 2,
-                    padding: "1px",
-                    borderRadius: "4px",
-                    color: "white",
-                    backgroundColor: "red",
-                  }}
-                >
-                  {error}
-                </Typography>
-              </Box>
-            </>
+            <Box>
+              <Typography
+                sx={{
+                  mb: 2,
+                  padding: "1px",
+                  borderRadius: "4px",
+                  color: "white",
+                  backgroundColor: "red",
+                }}
+              >
+                {error}
+              </Typography>
+            </Box>
           )}
           <Box>
             <PHForm
@@ -99,7 +110,7 @@ const LoginPage = () => {
                     fullWidth={true}
                     label="Password"
                     name="password"
-                    type="text"
+                    type="password"
                   />
                 </Grid>
               </Grid>
@@ -113,9 +124,34 @@ const LoginPage = () => {
                   Forgot Password?
                 </Typography>
               </Link>
-              <Button type="submit" fullWidth sx={{ my: 3 }}>
-                Please login
-              </Button>
+              <Box
+                sx={{
+                  position: "relative",
+                  display: "inline-block",
+                  width: "100%",
+                }}
+              >
+                <Button
+                  type="submit"
+                  fullWidth
+                  sx={{ my: 3 }}
+                  disabled={isLoading}
+                >
+                  Please login
+                </Button>
+                {isLoading && (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      marginTop: "-12px",
+                      marginLeft: "-12px",
+                    }}
+                  />
+                )}
+              </Box>
               <Typography component="p" fontWeight={300}>
                 Don&rsquo;t have an account?{" "}
                 <Box color="primary.main" component="span">
