@@ -39,7 +39,6 @@ const BloodRequestModal = ({ open, setOpen, id }: TModalProps) => {
     requesterName: userData?.name || "",
     bloodType: "",
     hospitalName: "",
-    //requestDate: "",
     bloodNeedDetails: "",
     location: userData?.location || "",
     contactNumber: userData?.contactNumber || "",

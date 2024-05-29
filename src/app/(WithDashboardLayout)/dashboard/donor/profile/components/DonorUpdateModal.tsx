@@ -25,7 +25,7 @@ type TModalProps = {
   id: string;
 };
 const DonorUpdateModal = ({ open, setOpen, id }: TModalProps) => {
-  const [isChecked, setIsChecked] = useState(false); // Initial state (can adjust based on fetched data)
+  const [isChecked, setIsChecked] = useState(false);
   console.log(isChecked);
 
   const handleSwitchChange = (event: any) => {

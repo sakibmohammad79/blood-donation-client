@@ -14,12 +14,17 @@ import {
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
+import AdminUPdateModal from "../profile/components/AdminUpdateModal";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DonorUpdateModal from "../../donor/profile/components/DonorUpdateModal";
 
 const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 
 const ManageDonor = () => {
+  const [isModalOpen, SetIsModalOpen] = React.useState(false);
+
   const { data: donors, isLoading } = useGetAllDonorsQuery({});
-  console.log(donors);
   const [donorStatusUpdate] = useDonorStatusUpdateMutation();
 
   const handleStatusChange = async (id: string, value: string) => {
@@ -62,6 +67,26 @@ const ManageDonor = () => {
             </MenuItem>
           ))}
         </Select>
+      ),
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      flex: 1,
+      renderCell: ({ row }) => (
+        <Box>
+          <IconButton onClick={() => SetIsModalOpen(true)}>
+            <EditIcon></EditIcon>
+            <DonorUpdateModal
+              id={row.id}
+              open={isModalOpen}
+              setOpen={SetIsModalOpen}
+            ></DonorUpdateModal>
+          </IconButton>
+          <IconButton>
+            <DeleteIcon></DeleteIcon>
+          </IconButton>
+        </Box>
       ),
     },
   ];

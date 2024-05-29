@@ -1,5 +1,5 @@
 "use client";
-import { useGetAllDonorsQuery } from "@/redux/api/donorApi";
+
 import {
   Box,
   IconButton,
@@ -13,18 +13,34 @@ import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
   useAdminStatusUpdateMutation,
+  useDeleteAdminMutation,
   useGetAllAdminQuery,
 } from "@/redux/api/adminApi";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AdminUPdateModal from "../profile/components/AdminUpdateModal";
+import { toast } from "sonner";
 
 const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 
 const ManageAdmin = () => {
-  const { data: admins, isLoading } = useGetAllAdminQuery({});
+  const [isModalOpen, SetIsModalOpen] = React.useState(false);
 
+  const { data: admins, isLoading } = useGetAllAdminQuery({});
   const [adminStatusUpdate] = useAdminStatusUpdateMutation();
 
   const handleStatusChange = async (id: string, value: string) => {
     await adminStatusUpdate({ id, value });
+  };
+
+  const [deleteAdmin] = useDeleteAdminMutation();
+
+  const handleAdminDelete = async (id: string) => {
+    const res = await deleteAdmin(id).unwrap();
+
+    if (res?.id) {
+      toast.success("Admin deleted successfully!");
+    }
   };
 
   const rows =
@@ -41,6 +57,9 @@ const ManageAdmin = () => {
   const columns: GridColDef[] = [
     { field: "name", headerName: "Name", flex: 1 },
     { field: "email", headerName: "Email", flex: 1 },
+    { field: "bloodType", headerName: "Blood Type", flex: 1 },
+    { field: "gender", headerName: "Gender", flex: 1 },
+    { field: "location", headerName: "Location", flex: 1 },
     { field: "contactNumber", headerName: "Contact Number", flex: 1 },
     {
       field: "status",
@@ -60,6 +79,26 @@ const ManageAdmin = () => {
             </MenuItem>
           ))}
         </Select>
+      ),
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      flex: 1,
+      renderCell: ({ row }) => (
+        <Box>
+          <IconButton onClick={() => SetIsModalOpen(true)}>
+            <EditIcon></EditIcon>
+            <AdminUPdateModal
+              id={row.id}
+              open={isModalOpen}
+              setOpen={SetIsModalOpen}
+            ></AdminUPdateModal>
+          </IconButton>
+          <IconButton onClick={() => handleAdminDelete(row.id)}>
+            <DeleteIcon></DeleteIcon>
+          </IconButton>
+        </Box>
       ),
     },
   ];

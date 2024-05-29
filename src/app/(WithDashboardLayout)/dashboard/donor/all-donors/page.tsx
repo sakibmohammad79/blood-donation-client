@@ -6,10 +6,15 @@ import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import BloodtypeIcon from "@mui/icons-material/Bloodtype";
 import BloodRequestModal from "./components/BloodRequestModal";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AdminUPdateModal from "../../admin/profile/components/AdminUpdateModal";
+import DonorUpdateModal from "../profile/components/DonorUpdateModal";
 
 const AllDonorPage = () => {
   const [id, setId] = React.useState("");
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+  const [updateModalOpen, setUpdateModalOpen] = React.useState(false);
   const { data: donors, isLoading } = useGetAllDonorsQuery({});
 
   const handleClick = (rowId: string) => {
@@ -46,6 +51,26 @@ const AllDonorPage = () => {
           </IconButton>
         );
       },
+    },
+    {
+      field: "actions",
+      headerName: "Action",
+      flex: 1,
+      renderCell: ({ row }) => (
+        <Box>
+          <IconButton onClick={() => setUpdateModalOpen(true)}>
+            <EditIcon></EditIcon>
+            <DonorUpdateModal
+              id={row.id}
+              open={updateModalOpen}
+              setOpen={setUpdateModalOpen}
+            ></DonorUpdateModal>
+          </IconButton>
+          <IconButton>
+            <DeleteIcon></DeleteIcon>
+          </IconButton>
+        </Box>
+      ),
     },
   ];
   return (

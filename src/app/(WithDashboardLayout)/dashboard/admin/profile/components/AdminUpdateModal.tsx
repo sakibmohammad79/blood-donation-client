@@ -20,7 +20,6 @@ import {
   Input,
   Switch,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 
 type TModalProps = {

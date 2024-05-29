@@ -40,6 +40,13 @@ const donorApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.donor, tagTypes.user],
     }),
+    deleteDonor: build.mutation({
+      query: (id) => ({
+        url: `/donor/soft-delete/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: [tagTypes.donor],
+    }),
   }),
 });
 
