@@ -66,9 +66,6 @@ const AllDonorPage = () => {
               setOpen={setUpdateModalOpen}
             ></DonorUpdateModal>
           </IconButton>
-          <IconButton>
-            <DeleteIcon></DeleteIcon>
-          </IconButton>
         </Box>
       ),
     },

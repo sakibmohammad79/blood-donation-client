@@ -1,5 +1,6 @@
 "use client";
 import {
+  useDeleteDonorMutation,
   useDonorStatusUpdateMutation,
   useGetAllDonorsQuery,
 } from "@/redux/api/donorApi";
@@ -18,6 +19,7 @@ import AdminUPdateModal from "../profile/components/AdminUpdateModal";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DonorUpdateModal from "../../donor/profile/components/DonorUpdateModal";
+import { toast } from "sonner";
 
 const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 
@@ -29,6 +31,19 @@ const ManageDonor = () => {
 
   const handleStatusChange = async (id: string, value: string) => {
     await donorStatusUpdate({ id, value });
+  };
+
+  const [deleteDonor] = useDeleteDonorMutation();
+
+  const handleDonorDelete = async (id: string) => {
+    try {
+      const res = await deleteDonor(id).unwrap();
+      if (res?.id) {
+        toast.success("Donor deleted successfully!");
+      }
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
   const rows =
@@ -83,7 +98,7 @@ const ManageDonor = () => {
               setOpen={SetIsModalOpen}
             ></DonorUpdateModal>
           </IconButton>
-          <IconButton>
+          <IconButton onClick={() => handleDonorDelete(row.id)}>
             <DeleteIcon></DeleteIcon>
           </IconButton>
         </Box>

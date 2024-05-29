@@ -37,51 +37,61 @@ const BloodRequestMe = () => {
           return {
             ...requestMe,
             status,
-            contactNumber: requestMe.contactNumber,
-            location: requestMe.location,
-            hospitalName: requestMe.hospitalName,
+            contactNumber: requestMe.contactNumber || "N/A",
+            location: requestMe.location || "N/A",
+            hospitalName: requestMe.hospitalName || "N/A",
           };
         })
       : [];
 
   const columns: GridColDef[] = [
-    { field: "requesterName", headerName: "Requester Name", flex: 1 },
+    {
+      field: "requesterName",
+      headerName: "Requester Name",
+      flex: 1,
+    },
     { field: "bloodType", headerName: "Blood Type", flex: 1 },
     { field: "requestDate", headerName: "Request Date", flex: 1 },
     {
       field: "status",
       headerName: "Status",
-      flex: 5,
+      flex: 1,
       renderCell: (params) => (
-        <>
-          <Select
-            sx={{ width: "150px" }}
-            value={params.row.status}
-            onChange={(event) =>
-              handleStatusChange(params.row.requesterId, event.target.value)
-            }
-          >
-            {allowedStatuses.map((status) => (
-              <MenuItem key={status} value={status}>
-                {status}
-              </MenuItem>
-            ))}
-          </Select>
-          {params.row.status === "APPROVED" && (
-            <>
-              <Typography variant="body2" sx={{ ml: 2 }}>
-                Contact: {params.row.contactNumber}
-              </Typography>
-              <Typography variant="body2" sx={{ ml: 2 }}>
-                Hospital: {params.row.hospitalName}
-              </Typography>
-              <Typography variant="body2" sx={{ ml: 2 }}>
-                location: {params.row.location}
-              </Typography>
-            </>
-          )}
-        </>
+        <Select
+          sx={{ width: "150px" }}
+          value={params.row.status}
+          onChange={(event) =>
+            handleStatusChange(params.row.requesterId, event.target.value)
+          }
+        >
+          {allowedStatuses.map((status) => (
+            <MenuItem key={status} value={status}>
+              {status}
+            </MenuItem>
+          ))}
+        </Select>
       ),
+    },
+    {
+      field: "userInfo",
+      headerName: "User Info",
+      flex: 2,
+      renderCell: (params) =>
+        params.row.status === "APPROVED" ? (
+          <>
+            <Typography variant="body2">
+              Contact: {params.row.contactNumber}
+            </Typography>
+            <Typography variant="body2" mx={2}>
+              Hospital: {params.row.hospitalName}
+            </Typography>
+            <Typography variant="body2">
+              Location: {params.row.location}
+            </Typography>
+          </>
+        ) : (
+          <Typography variant="body2">N/A</Typography>
+        ),
     },
   ];
 

@@ -63,7 +63,10 @@ const AdminProfile = () => {
           >
             <Image
               className="rounded-full border-2 border-red-400"
-              src={data?.photo ?? data?.name}
+              src={
+                data?.photo ||
+                "https://i.postimg.cc/43gT3HP6/pngtree-user-icon-isolated-on-abstract-background-png-image-5192004.jpg"
+              }
               alt="Doctor Image"
               height={300}
               width={400}

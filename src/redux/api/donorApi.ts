@@ -55,4 +55,5 @@ export const {
   useDonorStatusUpdateMutation,
   useGetSingleDonorQuery,
   useDonorUpdateMutation,
+  useDeleteDonorMutation,
 } = donorApi;
