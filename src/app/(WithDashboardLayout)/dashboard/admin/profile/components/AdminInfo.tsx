@@ -55,12 +55,6 @@ const AdminInfo = ({ data }: any) => {
         </StyledInformationBox>
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
-            Availability
-          </Typography>
-          <Typography>{data?.availability ? "True" : "False"}</Typography>
-        </StyledInformationBox>
-        <StyledInformationBox>
-          <Typography variant="caption" color="secondary">
             Email
           </Typography>
           <Typography>{data?.email}</Typography>

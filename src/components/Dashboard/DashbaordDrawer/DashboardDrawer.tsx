@@ -84,7 +84,7 @@ export default function DashboardDrawer({
                 noWrap
                 component="div"
               >
-                Welcome to BGC Health Care
+                Welcome To Blood Care
               </Typography>
             </Box>
 
@@ -95,7 +95,7 @@ export default function DashboardDrawer({
                 </IconButton>
               </Badge>
               <Avatar alt={user?.name} src={user?.photo ?? user?.name}></Avatar>
-              {/* <Avatar alt={"anme"} src={"name"}></Avatar> */}
+
               <AccountMenu />
             </Stack>
           </Box>

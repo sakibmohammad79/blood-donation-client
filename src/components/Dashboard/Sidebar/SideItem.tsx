@@ -4,6 +4,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import Link from "next/link";
 
@@ -33,8 +34,14 @@ const SidebarItem = ({ item }: IProps) => {
         disablePadding
       >
         <ListItemButton>
-          <ListItemIcon>{item?.icon && <item.icon />}</ListItemIcon>
-          <ListItemText primary={item.title} />
+          <ListItemIcon sx={{ color: "white" }}>
+            {item?.icon && <item.icon />}
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <Typography sx={{ color: "white" }}>{item.title}</Typography>
+            }
+          />
         </ListItemButton>
       </ListItem>
     </Link>

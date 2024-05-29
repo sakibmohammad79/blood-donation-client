@@ -1,16 +1,14 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import HealingIcon from "@mui/icons-material/Healing";
-import StarBorderPurple500Icon from "@mui/icons-material/StarBorderPurple500";
-import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import GroupIcon from "@mui/icons-material/Group";
-import PaymentIcon from "@mui/icons-material/Payment";
-import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
-import SummarizeIcon from "@mui/icons-material/Summarize";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
 import { DrawerItems, UserRole } from "@/types/common";
 import { USER_ROLE } from "@/constant/role";
+import Diversity1Icon from "@mui/icons-material/Diversity1";
+import CallMadeIcon from "@mui/icons-material/CallMade";
+import CallReceivedIcon from "@mui/icons-material/CallReceived";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 export const drawerItems = (role: UserRole) => {
   const roleMenus: DrawerItems[] = [];
@@ -38,12 +36,12 @@ export const drawerItems = (role: UserRole) => {
         {
           title: "Manage Donor",
           path: `${role}/manage-donor`,
-          icon: GroupIcon,
+          icon: Diversity1Icon,
         },
         {
           title: "Manage Admin",
           path: `${role}/manage-admin`,
-          icon: GroupIcon,
+          icon: AdminPanelSettingsIcon,
         }
       );
       break;
@@ -57,17 +55,17 @@ export const drawerItems = (role: UserRole) => {
         {
           title: "All Donor",
           path: `${role}/all-donors`,
-          icon: HealingIcon,
+          icon: Diversity1Icon,
         },
         {
           title: "My Request",
           path: `${role}/my-request`,
-          icon: HealingIcon,
+          icon: CallMadeIcon,
         },
         {
           title: "Request Me",
           path: `${role}/request-me`,
-          icon: HealingIcon,
+          icon: CallReceivedIcon,
         }
       );
       break;

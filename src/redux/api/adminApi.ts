@@ -18,6 +18,13 @@ const adminApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.admin],
     }),
+    getSingleAdmin: build.query({
+      query: (id) => ({
+        url: `/admin/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.admin],
+    }),
     adminStatusUpdate: build.mutation({
       query: (data: any) => ({
         url: `/admin/status/${data.id}?status=${data.value}`,
@@ -40,4 +47,5 @@ export const {
   useGetAllAdminQuery,
   useAdminStatusUpdateMutation,
   useAdminUpdateMutation,
+  useGetSingleAdminQuery,
 } = adminApi;

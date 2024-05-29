@@ -5,6 +5,10 @@ import { PHSelect } from "@/Form/PHSelect";
 import PHModal from "@/components/Shared/PHModal/PHModal";
 import { availabilityItems, bloodTypeItem, genderItem } from "@/constant";
 import {
+  useAdminUpdateMutation,
+  useGetSingleAdminQuery,
+} from "@/redux/api/adminApi";
+import {
   useDonorUpdateMutation,
   useGetSingleDonorQuery,
 } from "@/redux/api/donorApi";
@@ -24,36 +28,24 @@ type TModalProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
 };
-const DonorUpdateModal = ({ open, setOpen, id }: TModalProps) => {
-  const [isChecked, setIsChecked] = useState(false); // Initial state (can adjust based on fetched data)
-  console.log(isChecked);
 
-  const handleSwitchChange = (event: any) => {
-    setIsChecked(event.target.checked);
-  };
+const AdminUPdateModal = ({ open, setOpen, id }: TModalProps) => {
+  const { data } = useGetSingleAdminQuery(id);
 
-  const { data } = useGetSingleDonorQuery(id);
-  const [updateDonor, { isLoading }] = useDonorUpdateMutation();
-
-  useEffect(() => {
-    if (data) {
-      setIsChecked(data?.availability || false);
-    }
-  }, [data]);
+  const [updateAdmin, { isLoading }] = useAdminUpdateMutation();
 
   const donorData = {
     name: data?.name || "",
-    gender: data?.gender || "",
+    email: data?.email || "",
     contactNumber: data?.contactNumber || "",
     location: data?.location || "",
+    gender: data?.gender || "",
     bloodType: data?.bloodType || "",
-    availability: isChecked,
   };
 
-  const handeDonorUpdate = async (values: FieldValues) => {
-    values.availability = isChecked;
+  const handleAdminUpdate = async (values: FieldValues) => {
     try {
-      const res = await updateDonor({ id: id, data: values }).unwrap();
+      const res = await updateAdmin({ id: id, body: values }).unwrap();
       if (res?.id) {
         setOpen(false);
       }
@@ -64,7 +56,7 @@ const DonorUpdateModal = ({ open, setOpen, id }: TModalProps) => {
   return (
     <PHModal open={open} setOpen={setOpen} title="Update Profile">
       <Box sx={{ padding: 2 }}>
-        <PHForm onSubmit={handeDonorUpdate} defaultValues={donorData}>
+        <PHForm onSubmit={handleAdminUpdate} defaultValues={donorData}>
           <Grid
             container
             spacing={4}
@@ -106,14 +98,6 @@ const DonorUpdateModal = ({ open, setOpen, id }: TModalProps) => {
                 item={bloodTypeItem}
               ></PHSelect>
             </Grid>
-            <Grid item xs={12} sm={12} md={6}>
-              <FormControlLabel
-                control={
-                  <Switch checked={isChecked} onChange={handleSwitchChange} />
-                }
-                label="Available for Donation"
-              />
-            </Grid>
           </Grid>
           <Box mt={4} textAlign="end">
             <Button disabled={isLoading} type="submit">
@@ -126,4 +110,4 @@ const DonorUpdateModal = ({ open, setOpen, id }: TModalProps) => {
   );
 };
 
-export default DonorUpdateModal;
+export default AdminUPdateModal;

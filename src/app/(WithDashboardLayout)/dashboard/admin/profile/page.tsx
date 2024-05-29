@@ -1,6 +1,6 @@
 "use client";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
-import { Box, CircularProgress, Grid } from "@mui/material";
+import { Box, Button, CircularProgress, Grid } from "@mui/material";
 import Image from "next/image";
 import AdminInfo from "./components/AdminInfo";
 import { CloudUpload as CloudUploadIcon } from "@mui/icons-material";
@@ -8,10 +8,14 @@ import { FieldValues } from "react-hook-form";
 import AutoFileUploader from "@/Form/AutoFileUploader";
 import axios from "axios";
 import { useAdminUpdateMutation } from "@/redux/api/adminApi";
+import { useState } from "react";
+import EditIcon from "@mui/icons-material/Edit";
+import AdminUPdateModal from "./components/AdminUpdateModal";
 
 const AdminProfile = () => {
-  const { data, isLoading } = useGetSingleUserQuery({});
+  const { data, isFetching } = useGetSingleUserQuery({});
   const [adminUpdate, { isLoading: isUploading }] = useAdminUpdateMutation();
+  const [isModalOpen, SetIsModalOpen] = useState(false);
 
   const fileUploadHandler = async (file: File) => {
     console.log(file);
@@ -82,19 +86,22 @@ const AdminProfile = () => {
                 onFileUpload={fileUploadHandler}
                 variant="text"
               ></AutoFileUploader>
-              {/* <DoctorProfileUpdateModal
+              <AdminUPdateModal
                 id={data?.id}
                 open={isModalOpen}
                 setOpen={SetIsModalOpen}
-              ></DoctorProfileUpdateModal>
-              <Button
-                endIcon={<EditIcon />}
-                onClick={() => SetIsModalOpen(true)}
-              >
-                Update Profile
-              </Button> */}
+              ></AdminUPdateModal>
             </Box>
           )}
+          <Box sx={{ textAlign: "center", pt: 2 }}>
+            <Button
+              disabled={isFetching}
+              endIcon={<EditIcon />}
+              onClick={() => SetIsModalOpen(true)}
+            >
+              Update Profile
+            </Button>
+          </Box>
         </Grid>
         <AdminInfo data={data}></AdminInfo>
       </Grid>
