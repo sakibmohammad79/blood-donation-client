@@ -14,9 +14,9 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 
 const MyBloodRequest = () => {
-  const { data, isLoading } = useGetAllMyBloodRequestQuery({});
+  const { data, isLoading, isError } = useGetAllMyBloodRequestQuery({});
   const [selectedId, setSelectedId] = useState("");
-  console.log(selectedId);
+
   const { data: receiverRequestData, isFetching: isFetchingReceiverData } =
     useGetSingleBloodRequestReceiverQuery(selectedId, { skip: !selectedId });
 
@@ -70,27 +70,15 @@ const MyBloodRequest = () => {
       ),
     },
   ];
-  // const { data: requestReceiverData } = useGetSingleBloodRequestReceiverQuery(
-  //   {}
-  // );
-  // const { data, isLoading } = useGetAllMyBloodRequestQuery({});
 
-  // const columns: GridColDef[] = [
-  //   { field: "requesterName", headerName: "My Name", flex: 1 },
-  //   { field: "bloodType", headerName: "Blood Type", flex: 1 },
-  //   { field: "requestDate", headerName: "Request Date", flex: 1 },
-  //   { field: "status", headerName: "Status", flex: 1 },
-  // ];
+  const rows = data?.myRequest || [];
+
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <TextField size="small" placeholder="Search Specialist"></TextField>
       </Stack>
-      {!isLoading ? (
-        <Box my={2} justifyContent="center" alignItems="center">
-          <DataGrid rows={data?.myRequest} columns={columns} hideFooter />
-        </Box>
-      ) : (
+      {isLoading ? (
         <Box
           sx={{
             display: "flex",
@@ -101,6 +89,18 @@ const MyBloodRequest = () => {
         >
           <CircularProgress />
         </Box>
+      ) : isError ? (
+        <Typography variant="h6" color="error" textAlign="center" mt={2}>
+          Error loading requests. Please try again later.
+        </Typography>
+      ) : rows.length > 0 ? (
+        <Box my={2} justifyContent="center" alignItems="center">
+          <DataGrid rows={rows} columns={columns} hideFooter autoHeight />
+        </Box>
+      ) : (
+        <Typography variant="h6" textAlign="center" mt={2}>
+          No requests available.
+        </Typography>
       )}
     </Box>
   );

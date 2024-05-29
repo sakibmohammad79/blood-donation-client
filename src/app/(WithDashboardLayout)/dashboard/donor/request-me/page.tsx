@@ -17,9 +17,11 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 const allowedStatuses = ["APPROVED", "REJECTED", "PENDING"];
 
 const BloodRequestMe = () => {
-  const { data: offeredRequest, isLoading } = useGetAllOfferedMeRequestQuery(
-    {}
-  );
+  const {
+    data: offeredRequest,
+    isLoading,
+    isError,
+  } = useGetAllOfferedMeRequestQuery({});
 
   const [offeredMeRequestUpdate] = useOfferedMeRequestUpdateMutation();
 
@@ -52,6 +54,7 @@ const BloodRequestMe = () => {
     },
     { field: "bloodType", headerName: "Blood Type", flex: 1 },
     { field: "requestDate", headerName: "Request Date", flex: 1 },
+    { field: "bloodNeedDetails", headerName: "Need Details", flex: 1 },
     {
       field: "status",
       headerName: "Status",
@@ -75,7 +78,7 @@ const BloodRequestMe = () => {
     {
       field: "userInfo",
       headerName: "User Info",
-      flex: 2,
+      flex: 4,
       renderCell: (params) =>
         params.row.status === "APPROVED" ? (
           <>
@@ -98,13 +101,9 @@ const BloodRequestMe = () => {
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <TextField size="small" placeholder="Search Specialist"></TextField>
+        <TextField size="small" placeholder="Search Specialist" />
       </Stack>
-      {!isLoading ? (
-        <Box my={2} justifyContent="center" alignItems="center">
-          <DataGrid rows={rows} columns={columns} hideFooter />
-        </Box>
-      ) : (
+      {isLoading ? (
         <Box
           sx={{
             display: "flex",
@@ -115,6 +114,18 @@ const BloodRequestMe = () => {
         >
           <CircularProgress />
         </Box>
+      ) : isError ? (
+        <Typography variant="h6" color="error" textAlign="center" mt={2}>
+          Error loading recieved request. Please try again later.
+        </Typography>
+      ) : rows.length > 0 ? (
+        <Box my={2} justifyContent="center" alignItems="center">
+          <DataGrid rows={rows} columns={columns} hideFooter />
+        </Box>
+      ) : (
+        <Typography variant="h6" textAlign="center" mt={2}>
+          No request available.
+        </Typography>
       )}
     </Box>
   );

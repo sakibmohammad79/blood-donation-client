@@ -1,6 +1,6 @@
 "use client";
 import { useGetAllDonorsQuery } from "@/redux/api/donorApi";
-import { Box, IconButton, Stack, TextField } from "@mui/material";
+import { Box, IconButton, Stack, TextField, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -15,11 +15,14 @@ const AllDonorPage = () => {
   const [id, setId] = React.useState("");
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const [updateModalOpen, setUpdateModalOpen] = React.useState(false);
-  const { data: donors, isLoading } = useGetAllDonorsQuery({});
+
+  const query: Record<string, any> = {};
+
+  const { data: donors, isLoading, isError } = useGetAllDonorsQuery({});
 
   const handleClick = (rowId: string) => {
-    setId(rowId); // Set the id state
-    setIsModalOpen(true); // Set the isModalOpen state
+    setId(rowId);
+    setIsModalOpen(true);
   };
 
   const columns: GridColDef[] = [
@@ -73,13 +76,9 @@ const AllDonorPage = () => {
   return (
     <Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <TextField size="small" placeholder="Search Specialist"></TextField>
+        <TextField size="small" placeholder="Search Specialist" />
       </Stack>
-      {!isLoading ? (
-        <Box my={2} justifyContent="center" alignItems="center">
-          <DataGrid rows={donors?.donor} columns={columns} hideFooter />
-        </Box>
-      ) : (
+      {isLoading ? (
         <Box
           sx={{
             display: "flex",
@@ -90,6 +89,18 @@ const AllDonorPage = () => {
         >
           <CircularProgress />
         </Box>
+      ) : isError ? (
+        <Typography variant="h6" color="error" textAlign="center" mt={2}>
+          Error loading donors. Please try again later.
+        </Typography>
+      ) : donors?.donor?.length > 0 ? (
+        <Box my={2} justifyContent="center" alignItems="center">
+          <DataGrid rows={donors?.donor || []} columns={columns} hideFooter />
+        </Box>
+      ) : (
+        <Typography variant="h6" textAlign="center" mt={2}>
+          No donors available.
+        </Typography>
       )}
     </Box>
   );
