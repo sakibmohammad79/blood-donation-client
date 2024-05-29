@@ -1,6 +1,6 @@
 "use client";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
-import { Box, Button, CircularProgress, Grid } from "@mui/material";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import DonorInfo from "./components/DonorInfo";
 import { useDonorUpdateMutation } from "@/redux/api/donorApi";
@@ -11,12 +11,12 @@ import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 
 const DonorProfile = () => {
-  const [isModalOpen, SetIsModalOpen] = useState(false);
-  const { data, isFetching } = useGetSingleUserQuery({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { data, isFetching, isError } = useGetSingleUserQuery({});
+  console.log(data);
   const [donorUpdate, { isLoading: isUploading }] = useDonorUpdateMutation();
 
   const fileUploadHandler = async (file: File) => {
-    console.log(file);
     const formData = new FormData();
     formData.append("image", file);
     try {
@@ -33,18 +33,37 @@ const DonorProfile = () => {
       }
 
       const result = await response.json();
+      console.log(result);
       const imageUrl = result?.data?.url;
+      console.log(imageUrl);
       if (imageUrl) {
         const res = await donorUpdate({
           id: data?.id,
-          body: { photo: imageUrl },
+          data: { photo: imageUrl },
         });
+        console.log(res);
       }
     } catch (error) {
       console.error("Error uploading to ImgBB:", error);
       throw new Error("Could not upload image");
     }
   };
+
+  if (isFetching) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Typography variant="h6" color="error" textAlign="center" mt={2}>
+        Error loading profile. Please try again later.
+      </Typography>
+    );
+  }
 
   return (
     <Box>
@@ -67,53 +86,43 @@ const DonorProfile = () => {
                 data?.photo ||
                 "https://i.postimg.cc/43gT3HP6/pngtree-user-icon-isolated-on-abstract-background-png-image-5192004.jpg"
               }
-              alt="Doctor Image"
+              alt="Donor Image"
               height={300}
               width={400}
-            ></Image>
+            />
           </Box>
 
           {isUploading ? (
-            <Box
-              sx={{
-                mt: 2,
-              }}
-            >
+            <Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>
               <CircularProgress />
             </Box>
           ) : (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                mt: 2,
-              }}
-            >
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
               <AutoFileUploader
                 name="file"
-                label="choose your profile photo"
+                label="Choose your profile photo"
                 icon={<CloudUploadIcon />}
                 onFileUpload={fileUploadHandler}
                 variant="text"
-              ></AutoFileUploader>
+              />
               <DonorUpdateModal
                 id={data?.id}
                 open={isModalOpen}
-                setOpen={SetIsModalOpen}
-              ></DonorUpdateModal>
+                setOpen={setIsModalOpen}
+              />
             </Box>
           )}
           <Box sx={{ textAlign: "center", mt: 2 }}>
             <Button
               disabled={isFetching}
               endIcon={<EditIcon />}
-              onClick={() => SetIsModalOpen(true)}
+              onClick={() => setIsModalOpen(true)}
             >
               Update Profile
             </Button>
           </Box>
         </Grid>
-        <DonorInfo data={data}></DonorInfo>
+        <DonorInfo data={data} />
       </Grid>
     </Box>
   );

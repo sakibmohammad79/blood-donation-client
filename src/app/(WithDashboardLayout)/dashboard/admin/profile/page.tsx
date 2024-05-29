@@ -37,7 +37,7 @@ const AdminProfile = () => {
       const result = await response.json();
       const imageUrl = result?.data?.url;
       if (imageUrl) {
-        const res = adminUpdate({ id: data.id, body: { photo: imageUrl } });
+        const res = adminUpdate({ id: data?.id, body: { photo: imageUrl } });
         console.log(res);
       }
     } catch (error) {
