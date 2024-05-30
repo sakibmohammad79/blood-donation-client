@@ -1,14 +1,22 @@
 "use client";
 import { useGetAllDonorsQuery } from "@/redux/api/donorApi";
-import { Box, IconButton, Stack, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControlLabel,
+  IconButton,
+  Stack,
+  Switch,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import BloodtypeIcon from "@mui/icons-material/Bloodtype";
 import BloodRequestModal from "./components/BloodRequestModal";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AdminUPdateModal from "../../admin/profile/components/AdminUpdateModal";
+
 import DonorUpdateModal from "../profile/components/DonorUpdateModal";
 
 const AllDonorPage = () => {
@@ -16,9 +24,34 @@ const AllDonorPage = () => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const [updateModalOpen, setUpdateModalOpen] = React.useState(false);
 
-  const query: Record<string, any> = {};
+  const [name, setName] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
+  const [location, setLocation] = React.useState<string>("");
+  const [bloodType, setBloodType] = React.useState<string>("");
+  const [availability, setAvailability] = React.useState<boolean>(false);
 
-  const { data: donors, isLoading, isError } = useGetAllDonorsQuery({});
+  const [query, setQuery] = React.useState<Record<string, any>>({});
+
+  const handleSearch = () => {
+    const newQuery: Record<string, any> = {};
+    if (location) newQuery.location = location;
+    if (bloodType) newQuery.bloodType = bloodType;
+    if (availability) newQuery.availability = availability;
+    if (name) newQuery.name = name;
+    if (email) newQuery.email = email;
+
+    setQuery(newQuery);
+  };
+
+  const {
+    data: donors,
+    isLoading,
+    isError,
+  } = useGetAllDonorsQuery({ ...query });
+
+  const handleAvailability = (event: any) => {
+    setAvailability(event.target.checked);
+  };
 
   const handleClick = (rowId: string) => {
     setId(rowId);
@@ -75,9 +108,50 @@ const AllDonorPage = () => {
   ];
   return (
     <Box>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <TextField size="small" placeholder="Search Specialist" />
-      </Stack>
+      <Box>
+        <Stack
+          direction="row"
+          justifyContent="start"
+          alignItems="center"
+          spacing={2}
+          my={3}
+        >
+          <TextField
+            label="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            size="medium"
+          />
+          <TextField
+            label="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            size="medium"
+          />
+          <TextField
+            label="Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            size="medium"
+          />
+          <TextField
+            label="Blood Type"
+            value={bloodType}
+            onChange={(e) => setBloodType(e.target.value)}
+            size="medium"
+          />
+
+          <FormControlLabel
+            control={
+              <Switch checked={availability} onChange={handleAvailability} />
+            }
+            label="Available for Donation"
+          />
+          <Button variant="contained" color="primary" onClick={handleSearch}>
+            Search
+          </Button>
+        </Stack>
+      </Box>
       {isLoading ? (
         <Box
           sx={{
