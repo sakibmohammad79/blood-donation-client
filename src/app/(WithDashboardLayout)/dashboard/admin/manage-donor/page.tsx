@@ -11,11 +11,11 @@ import {
   Select,
   Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import AdminUPdateModal from "../profile/components/AdminUpdateModal";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DonorUpdateModal from "../../donor/profile/components/DonorUpdateModal";
@@ -26,7 +26,7 @@ const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 const ManageDonor = () => {
   const [isModalOpen, SetIsModalOpen] = React.useState(false);
 
-  const { data: donors, isLoading } = useGetAllDonorsQuery({});
+  const { data: donors, isLoading, isError } = useGetAllDonorsQuery({});
   const [donorStatusUpdate] = useDonorStatusUpdateMutation();
 
   const handleStatusChange = async (id: string, value: string) => {
@@ -45,6 +45,22 @@ const ManageDonor = () => {
       console.log(err.message);
     }
   };
+
+  if (donors?.donor?.length < 0) {
+    return (
+      <Typography variant="h6" textAlign="center" mt={2}>
+        No donors available.
+      </Typography>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Typography variant="h6" color="error" textAlign="center" mt={2}>
+        Error loading donors. Please try again later.
+      </Typography>
+    );
+  }
 
   const rows =
     donors?.donor.map((donor: any) => {
@@ -107,14 +123,7 @@ const ManageDonor = () => {
   ];
   return (
     <Box>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <TextField size="small" placeholder="Search Specialist"></TextField>
-      </Stack>
-      {!isLoading ? (
-        <Box my={2} justifyContent="center" alignItems="center">
-          <DataGrid rows={rows} columns={columns} hideFooter />
-        </Box>
-      ) : (
+      {isLoading ? (
         <Box
           sx={{
             display: "flex",
@@ -125,6 +134,18 @@ const ManageDonor = () => {
         >
           <CircularProgress />
         </Box>
+      ) : isError ? (
+        <Typography variant="h6" color="error" textAlign="center" mt={2}>
+          Error loading donors. Please try again later.
+        </Typography>
+      ) : rows?.length > 0 ? (
+        <Box my={2} justifyContent="center" alignItems="center">
+          <DataGrid rows={rows} columns={columns} hideFooter />
+        </Box>
+      ) : (
+        <Typography variant="h6" textAlign="center" mt={2}>
+          No donors available.
+        </Typography>
       )}
     </Box>
   );

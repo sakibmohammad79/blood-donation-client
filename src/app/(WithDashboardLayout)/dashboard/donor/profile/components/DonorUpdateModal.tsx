@@ -26,7 +26,6 @@ type TModalProps = {
 };
 const DonorUpdateModal = ({ open, setOpen, id }: TModalProps) => {
   const [isChecked, setIsChecked] = useState(false);
-  console.log(isChecked);
 
   const handleSwitchChange = (event: any) => {
     setIsChecked(event.target.checked);

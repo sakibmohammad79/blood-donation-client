@@ -7,6 +7,7 @@ import {
   Select,
   Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
@@ -26,7 +27,7 @@ const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 const ManageAdmin = () => {
   const [isModalOpen, SetIsModalOpen] = React.useState(false);
 
-  const { data: admins, isLoading } = useGetAllAdminQuery({});
+  const { data: admins, isLoading, isError } = useGetAllAdminQuery({});
   const [adminStatusUpdate] = useAdminStatusUpdateMutation();
 
   const handleStatusChange = async (id: string, value: string) => {
@@ -42,6 +43,22 @@ const ManageAdmin = () => {
       toast.success("Admin deleted successfully!");
     }
   };
+
+  if (admins?.admin?.length < 0) {
+    return (
+      <Typography variant="h6" textAlign="center" mt={2}>
+        No donors available.
+      </Typography>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Typography variant="h6" color="error" textAlign="center" mt={2}>
+        Error loading donors. Please try again later.
+      </Typography>
+    );
+  }
 
   const rows =
     admins?.admin.map((admin: any) => {
@@ -104,14 +121,7 @@ const ManageAdmin = () => {
   ];
   return (
     <Box>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <TextField size="small" placeholder="Search Specialist"></TextField>
-      </Stack>
-      {!isLoading ? (
-        <Box my={2} justifyContent="center" alignItems="center">
-          <DataGrid rows={rows} columns={columns} hideFooter />
-        </Box>
-      ) : (
+      {isLoading ? (
         <Box
           sx={{
             display: "flex",
@@ -122,6 +132,18 @@ const ManageAdmin = () => {
         >
           <CircularProgress />
         </Box>
+      ) : isError ? (
+        <Typography variant="h6" color="error" textAlign="center" mt={2}>
+          Error loading admins. Please try again later.
+        </Typography>
+      ) : rows?.length > 0 ? (
+        <Box my={2} justifyContent="center" alignItems="center">
+          <DataGrid rows={rows} columns={columns} hideFooter />
+        </Box>
+      ) : (
+        <Typography variant="h6" textAlign="center" mt={2}>
+          No admins available.
+        </Typography>
       )}
     </Box>
   );

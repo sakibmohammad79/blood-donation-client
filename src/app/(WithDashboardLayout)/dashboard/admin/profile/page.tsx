@@ -1,6 +1,6 @@
 "use client";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
-import { Box, Button, CircularProgress, Grid } from "@mui/material";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import AdminInfo from "./components/AdminInfo";
 import { CloudUpload as CloudUploadIcon } from "@mui/icons-material";
@@ -13,7 +13,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import AdminUPdateModal from "./components/AdminUpdateModal";
 
 const AdminProfile = () => {
-  const { data, isFetching } = useGetSingleUserQuery({});
+  const { data, isFetching, isError } = useGetSingleUserQuery({});
   const [adminUpdate, { isLoading: isUploading }] = useAdminUpdateMutation();
   const [isModalOpen, SetIsModalOpen] = useState(false);
 
@@ -45,6 +45,22 @@ const AdminProfile = () => {
       throw new Error("Could not upload image");
     }
   };
+
+  if (data?.length < 0) {
+    return (
+      <Typography variant="h6" textAlign="center" mt={2}>
+        No admin available.
+      </Typography>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Typography variant="h6" color="error" textAlign="center" mt={2}>
+        Error loading admin. Please try again later.
+      </Typography>
+    );
+  }
 
   return (
     <Box>
