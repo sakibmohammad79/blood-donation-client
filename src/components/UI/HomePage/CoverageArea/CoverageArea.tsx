@@ -4,7 +4,7 @@ import Head from "next/head";
 
 export default function Home() {
   return (
-    <Box mt={16}>
+    <Box>
       <Box pb={8} textAlign="center">
         <Typography variant="h4" component="h4" fontWeight={600}>
           Our Blood Donation Coverage Area

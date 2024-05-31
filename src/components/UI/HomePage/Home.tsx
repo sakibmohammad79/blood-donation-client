@@ -4,6 +4,9 @@ import HeroSection from "./HeroScection/HeroSection";
 import Volunteers from "./Volunteers/Volunteers";
 import WhoSection from "./WhoSection/WhoSection";
 import CoverageArea from "./CoverageArea/CoverageArea";
+import Review from "./Review/Review";
+import DonorTips from "./DonorTips/DonorTips";
+import History from "./History/History";
 
 const Home = () => {
   return (
@@ -13,6 +16,9 @@ const Home = () => {
       <Gallery></Gallery>
       <Donor></Donor>
       <Volunteers></Volunteers>
+      <DonorTips></DonorTips>
+      <Review></Review>
+      <History></History>
       <CoverageArea></CoverageArea>
     </>
   );

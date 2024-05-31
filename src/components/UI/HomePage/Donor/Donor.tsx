@@ -4,14 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Donor = async () => {
-  const res = await fetch("http://localhost:5000/api/v1/donor", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/donor`, {
     next: {
       revalidate: 30,
     },
   });
 
   const { data: allDonor } = await res.json();
-  console.log(allDonor);
 
   return (
     <Box py={16}>

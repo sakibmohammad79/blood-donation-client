@@ -15,32 +15,38 @@ const Gallery = () => {
     galleryImage5,
   ];
   return (
-    <Container>
-      <Box py={16}>
-        <Box pb={8} textAlign="center">
-          <Typography variant="h4" component="h4" fontWeight={600}>
-            CAMPAIGN GALLERY
-          </Typography>
-          <Typography>
-            Our prestigious voluntary work on campaigns by the team
-          </Typography>
-        </Box>
-        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-          <Grid container spacing={2}>
-            {images.map((image, index) => (
-              <Grid item xs={12} sm={12} md={4} key={index}>
+    <Box py={16} sx={{ background: "#F9FAFB" }}>
+      <Box pb={8} textAlign="center">
+        <Typography variant="h4" component="h4" fontWeight={600}>
+          CAMPAIGN GALLERY
+        </Typography>
+        <Typography>
+          Our prestigious voluntary work on campaigns by the team
+        </Typography>
+      </Box>
+      <Box>
+        <Grid container spacing={2} mx="auto" maxWidth="lg">
+          {images.map((image, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Box
+                sx={{
+                  position: "relative",
+                  width: "100%",
+                  paddingBottom: "100%",
+                }}
+              >
                 <Image
-                  height={400}
-                  width={400}
                   src={image}
                   alt={`Gallery Image ${index + 1}`}
+                  layout="fill"
+                  objectFit="cover"
                 />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
       </Box>
-    </Container>
+    </Box>
   );
 };
 
