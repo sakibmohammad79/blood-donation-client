@@ -32,7 +32,10 @@ const Donor = async () => {
               <Box>
                 <Image
                   //src={donor?.photo}
-                  src="https://i.postimg.cc/BnmsxfQ5/pexels-designecologist-1779487.jpg"
+                  src={
+                    donor?.photo ||
+                    "https://i.postimg.cc/43gT3HP6/pngtree-user-icon-isolated-on-abstract-background-png-image-5192004.jpg"
+                  }
                   alt="donotImage"
                   height={140}
                   width={220}

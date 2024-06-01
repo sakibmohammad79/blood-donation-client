@@ -100,9 +100,6 @@ const BloodRequestMe = () => {
 
   return (
     <Box>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <TextField size="small" placeholder="Search Specialist" />
-      </Stack>
       {isLoading ? (
         <Box
           sx={{
@@ -132,11 +129,3 @@ const BloodRequestMe = () => {
 };
 
 export default BloodRequestMe;
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjMGFhYzI3ZC02NmU5LTRkODItOWMxNS1iZWU0NGIzODY2YjEiLCJlbWFpbCI6InRheXViQGdtYWlsLmNvbSIsInJvbGUiOiJET05PUiIsImlhdCI6MTcxNjcxNjIwMiwiZXhwIjoxNzE3MTQ4MjAyfQ.eUB4bYu6GKdd1BYk6GIWN2UqQVQ9ZkrOhD6IlQJmIL0 post
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYmQ5YTE0ZC1jZjc1LTRiNmUtYjQ3My0wMGFkNWI4ODNiMWIiLCJlbWFpbCI6InRheXViQGdtYWlsLmNvbSIsInJvbGUiOiJET05PUiIsImlhdCI6MTcxNjU3NzE2NiwiZXhwIjoxNzE3MDA5MTY2fQ.nKg5btOtto7ByPyFXgYkwM813-x7Y-rt3sPKGaQIvtg
-
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYTljOTVhYi03MDYzLTRlZjctYWJkNi1hNjgzMjAxYzdiZDQiLCJlbWFpbCI6InNhbWlAZ21haWwuY29tIiwicm9sZSI6IkRPTk9SIiwiaWF0IjoxNzE2NzE3MDY4LCJleHAiOjE3MTcxNDkwNjh9.rk90PncHmY9vj3q9_V0_jW05d5XGfqEoVCSlxcuKNpw
-
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYTljOTVhYi03MDYzLTRlZjctYWJkNi1hNjgzMjAxYzdiZDQiLCJlbWFpbCI6InNhbWlAZ21haWwuY29tIiwicm9sZSI6IkRPTk9SIiwiaWF0IjoxNzE2NzA5OTQxLCJleHAiOjE3MTcxNDE5NDF9.zc6BCvYkzjaSgpWffDIeMzlDYIhWU5hTCAgq_laCe2w

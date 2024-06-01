@@ -75,9 +75,6 @@ const MyBloodRequest = () => {
 
   return (
     <Box>
-      <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <TextField size="small" placeholder="Search Specialist"></TextField>
-      </Stack>
       {isLoading ? (
         <Box
           sx={{

@@ -10,7 +10,8 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useRouter } from "next/navigation";
-import { removeUser } from "@/services/authService";
+import { getuserInfo, removeUser } from "@/services/authService";
+import Link from "next/link";
 
 export default function AccountMenu() {
   const router = useRouter();
@@ -28,6 +29,7 @@ export default function AccountMenu() {
     removeUser();
     router.push("/");
   };
+  const userInfo = getuserInfo();
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -81,7 +83,9 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
+          <Box component={Link} href={`/dashboard/${userInfo?.role}/profile`}>
+            <Avatar /> Profile
+          </Box>
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleLogOut}>

@@ -1,7 +1,7 @@
 const DonorDashboardPage = () => {
   return (
     <div>
-      <h2>This is DonorDashboardPage component</h2>
+      <h2>Donor Dashoboad Coming.....</h2>
     </div>
   );
 };

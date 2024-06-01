@@ -17,7 +17,7 @@ export const drawerItems = (role: UserRole) => {
 
   const deafaultMenus = [
     {
-      title: "Profile",
+      title: "My Profile",
       path: `${role}/profile`,
       icon: AccountCircleIcon,
     },

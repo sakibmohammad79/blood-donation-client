@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Avatar, Badge, Stack } from "@mui/material";
+import { Avatar, Badge, Stack, Tooltip } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 // import AccountMenu from "../AccountMenu/AccountMenu";
 import Sidebar from "../Sidebar/Sidebar";
@@ -95,7 +95,15 @@ export default function DashboardDrawer({
                   <NotificationsNoneIcon color="action" />
                 </IconButton>
               </Badge>
-              <Avatar alt={user?.name} src={user?.photo ?? user?.name}></Avatar>
+              <Tooltip title={user?.name}>
+                <Avatar
+                  alt={user?.name}
+                  src={
+                    user?.photo ||
+                    "https://i.postimg.cc/43gT3HP6/pngtree-user-icon-isolated-on-abstract-background-png-image-5192004.jpg"
+                  }
+                ></Avatar>
+              </Tooltip>
 
               <AccountMenu />
             </Stack>

@@ -31,7 +31,6 @@ const Sidebar = () => {
         component={Link}
         href={"/"}
       >
-        {/* <Image src={assets.svgs.logo} alt="logo" height={40} width={40} /> */}
         <Typography variant="h5" component="h5" fontWeight={500}>
           <Box component="span" color="primary.main">
             {" "}
