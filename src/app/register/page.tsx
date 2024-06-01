@@ -23,6 +23,7 @@ import PHForm from "@/Form/PHForm";
 import PHInput from "@/Form/PHInput";
 import { PHSelect } from "@/Form/PHSelect";
 import { storeUserInfo } from "@/services/authService";
+import PHFile from "@/Form/PHFile";
 
 const donorRegisterValidationSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters!"),
@@ -133,7 +134,7 @@ const RegisterPage = () => {
               resolver={zodResolver(donorRegisterValidationSchema)}
             >
               <Grid container spacing={2}>
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <PHInput
                     name="donor.name"
                     fullWidth={true}
@@ -141,7 +142,7 @@ const RegisterPage = () => {
                     type="text"
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <PHInput
                     name="donor.email"
                     fullWidth={true}
@@ -149,7 +150,7 @@ const RegisterPage = () => {
                     type="text"
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <PHInput
                     name="password"
                     fullWidth={true}
@@ -157,7 +158,7 @@ const RegisterPage = () => {
                     type="text"
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <PHInput
                     name="userName"
                     fullWidth={true}
@@ -165,7 +166,7 @@ const RegisterPage = () => {
                     type="text"
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <PHSelect
                     name="donor.bloodType"
                     fullWidth={true}
@@ -173,7 +174,7 @@ const RegisterPage = () => {
                     item={bloodTypeItem}
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <PHInput
                     name="donor.contactNumber"
                     fullWidth={true}
@@ -181,7 +182,7 @@ const RegisterPage = () => {
                     type="text"
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <PHInput
                     name="donor.location"
                     fullWidth={true}
@@ -189,7 +190,7 @@ const RegisterPage = () => {
                     type="text"
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <PHSelect
                     name="donor.gender"
                     fullWidth={true}

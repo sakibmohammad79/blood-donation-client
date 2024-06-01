@@ -9,9 +9,10 @@ export type TFileProps = {
   name: string;
   label?: string;
   sx?: SxProps;
+  fullWidth?: boolean;
 };
 
-export default function PHFile({ name, label }: TFileProps) {
+export default function PHFile({ name, label, fullWidth }: TFileProps) {
   const { control } = useFormContext();
   return (
     <Controller
@@ -30,6 +31,7 @@ export default function PHFile({ name, label }: TFileProps) {
             <Input
               {...field}
               type={name}
+              fullWidth={fullWidth}
               value={value?.fileName}
               onChange={(e) =>
                 onChange((e.target as HTMLInputElement).files?.[0])

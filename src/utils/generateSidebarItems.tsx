@@ -9,6 +9,8 @@ import Diversity1Icon from "@mui/icons-material/Diversity1";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import CallReceivedIcon from "@mui/icons-material/CallReceived";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import ReviewsIcon from "@mui/icons-material/Reviews";
+import StarIcon from "@mui/icons-material/Star";
 
 export const drawerItems = (role: UserRole) => {
   const roleMenus: DrawerItems[] = [];
@@ -66,6 +68,11 @@ export const drawerItems = (role: UserRole) => {
           title: "Request Me",
           path: `${role}/request-me`,
           icon: CallReceivedIcon,
+        },
+        {
+          title: "Give Review",
+          path: `${role}/give-review`,
+          icon: StarIcon,
         }
       );
       break;

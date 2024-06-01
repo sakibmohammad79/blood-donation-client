@@ -13,7 +13,6 @@ import EditIcon from "@mui/icons-material/Edit";
 const DonorProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data, isFetching, isError } = useGetSingleUserQuery({});
-  console.log(data);
   const [donorUpdate, { isLoading: isUploading }] = useDonorUpdateMutation();
 
   const fileUploadHandler = async (file: File) => {
