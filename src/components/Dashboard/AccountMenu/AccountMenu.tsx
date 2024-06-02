@@ -14,6 +14,7 @@ import { getuserInfo, removeUser } from "@/services/authService";
 import Link from "next/link";
 
 export default function AccountMenu() {
+  const [userRole, setUserRole] = React.useState("");
   const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -29,7 +30,11 @@ export default function AccountMenu() {
     removeUser();
     router.push("/");
   };
-  const userInfo = getuserInfo();
+
+  React.useEffect(() => {
+    const { role } = getuserInfo() as any;
+    setUserRole(role);
+  }, []);
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -83,7 +88,7 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <Box component={Link} href={`/dashboard/${userInfo?.role}/profile`}>
+          <Box component={Link} href={`/dashboard/${userRole}/profile`}>
             <Avatar /> Profile
           </Box>
         </MenuItem>

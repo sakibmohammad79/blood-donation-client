@@ -2,6 +2,7 @@
 
 import {
   Box,
+  Button,
   IconButton,
   MenuItem,
   Select,
@@ -21,11 +22,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AdminUPdateModal from "../profile/components/AdminUpdateModal";
 import { toast } from "sonner";
+import CreateAdminModal from "./components/CreateAdminModal";
 
 const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 
 const ManageAdmin = () => {
-  const [isModalOpen, SetIsModalOpen] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isAdminModalOpen, setIsAdminModalOpen] = React.useState(false);
 
   const { data: admins, isLoading, isError } = useGetAllAdminQuery({});
   const [adminStatusUpdate] = useAdminStatusUpdateMutation();
@@ -104,12 +107,12 @@ const ManageAdmin = () => {
       flex: 1,
       renderCell: ({ row }) => (
         <Box>
-          <IconButton onClick={() => SetIsModalOpen(true)}>
+          <IconButton onClick={() => setIsModalOpen(true)}>
             <EditIcon></EditIcon>
             <AdminUPdateModal
               id={row.id}
               open={isModalOpen}
-              setOpen={SetIsModalOpen}
+              setOpen={setIsModalOpen}
             ></AdminUPdateModal>
           </IconButton>
           <IconButton onClick={() => handleAdminDelete(row.id)}>
@@ -121,6 +124,13 @@ const ManageAdmin = () => {
   ];
   return (
     <Box>
+      <Box>
+        <Button onClick={() => setIsAdminModalOpen(true)}>Create Admin</Button>
+        <CreateAdminModal
+          open={isAdminModalOpen}
+          setOpen={setIsAdminModalOpen}
+        ></CreateAdminModal>
+      </Box>
       {isLoading ? (
         <Box
           sx={{

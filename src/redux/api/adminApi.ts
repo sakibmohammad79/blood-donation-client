@@ -4,6 +4,15 @@ import { baseApi } from "./baseApi";
 
 const adminApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
+    createAdmin: build.mutation({
+      query: (data) => ({
+        url: "/user/create-admin",
+        method: "POST",
+        contentType: "application/json",
+        data,
+      }),
+      invalidatesTags: [tagTypes.admin],
+    }),
     getAllAdmin: build.query({
       query: (arg: Record<string, any>) => ({
         url: "/admin",
@@ -45,7 +54,7 @@ const adminApi = baseApi.injectEndpoints({
         url: `/admin/soft-delete/${id}`,
         method: "PATCH",
       }),
-      invalidatesTags: [tagTypes.admin],
+      invalidatesTags: [tagTypes.admin, tagTypes.user],
     }),
   }),
 });
@@ -56,4 +65,5 @@ export const {
   useAdminUpdateMutation,
   useGetSingleAdminQuery,
   useDeleteAdminMutation,
+  useCreateAdminMutation,
 } = adminApi;

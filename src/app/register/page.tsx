@@ -23,7 +23,6 @@ import PHForm from "@/Form/PHForm";
 import PHInput from "@/Form/PHInput";
 import { PHSelect } from "@/Form/PHSelect";
 import { storeUserInfo } from "@/services/authService";
-import PHFile from "@/Form/PHFile";
 
 const donorRegisterValidationSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters!"),

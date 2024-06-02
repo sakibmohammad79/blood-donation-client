@@ -1,6 +1,4 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import HealingIcon from "@mui/icons-material/Healing";
-import GroupIcon from "@mui/icons-material/Group";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyIcon from "@mui/icons-material/Key";
 import { DrawerItems, UserRole } from "@/types/common";
@@ -9,7 +7,7 @@ import Diversity1Icon from "@mui/icons-material/Diversity1";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import CallReceivedIcon from "@mui/icons-material/CallReceived";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import ReviewsIcon from "@mui/icons-material/Reviews";
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import StarIcon from "@mui/icons-material/Star";
 
 export const drawerItems = (role: UserRole) => {
@@ -44,6 +42,11 @@ export const drawerItems = (role: UserRole) => {
           title: "Manage Admin",
           path: `${role}/manage-admin`,
           icon: AdminPanelSettingsIcon,
+        },
+        {
+          title: "Manage Review",
+          path: `${role}/manage-review`,
+          icon: SettingsSuggestIcon,
         }
       );
       break;

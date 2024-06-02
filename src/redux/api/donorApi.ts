@@ -45,7 +45,7 @@ const donorApi = baseApi.injectEndpoints({
         url: `/donor/soft-delete/${id}`,
         method: "PATCH",
       }),
-      invalidatesTags: [tagTypes.donor],
+      invalidatesTags: [tagTypes.donor, tagTypes.user],
     }),
   }),
 });

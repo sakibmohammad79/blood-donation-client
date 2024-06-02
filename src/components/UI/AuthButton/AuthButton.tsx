@@ -4,10 +4,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { useEffect, useState } from "react";
 
 const AuthButton = () => {
   const router = useRouter();
-  const userInfo = getuserInfo();
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    const userInfo = getuserInfo();
+    if (userInfo) {
+      setUserId(userInfo?.userId);
+    }
+  }, []);
 
   const handleLogOut = () => {
     removeUser();
@@ -16,7 +24,7 @@ const AuthButton = () => {
   };
   return (
     <>
-      {userInfo?.userId ? (
+      {userId ? (
         <Box>
           <Box component={Link} href="/dashboard">
             <Tooltip title="Go to Dashboard">

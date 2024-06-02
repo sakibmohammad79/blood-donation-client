@@ -4,6 +4,7 @@ import { getuserInfo } from "@/services/authService";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const AuthButton = dynamic(
@@ -11,7 +12,14 @@ const Navbar = () => {
     { ssr: false }
   );
 
-  const userInfo = getuserInfo();
+  const [userRole, setUserRole] = useState("");
+
+  useEffect(() => {
+    const userInfo = getuserInfo();
+    if (userInfo) {
+      setUserRole(userInfo?.role);
+    }
+  }, [userRole]);
 
   return (
     <Container>
@@ -42,10 +50,10 @@ const Navbar = () => {
             ABOUT
           </Typography>
 
-          {userInfo?.role && (
+          {userRole && (
             <Typography
               component={Link}
-              href={`/dashboard/${userInfo?.role}/profile`}
+              href={`/dashboard/${userRole}/profile`}
               fontWeight={600}
             >
               PROFILE
