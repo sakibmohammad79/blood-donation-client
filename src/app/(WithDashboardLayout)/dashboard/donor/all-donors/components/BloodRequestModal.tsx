@@ -1,7 +1,9 @@
 import PHDatePicker from "@/Form/PHDatePicker";
 import PHForm from "@/Form/PHForm";
 import PHInput from "@/Form/PHInput";
+import { PHSelect } from "@/Form/PHSelect";
 import PHFullScreenModal from "@/components/Shared/PHFullScreenModal/PHFullScreenModal";
+import { bloodTypeItem } from "@/constant";
 import { useCreateBloodRequestMutation } from "@/redux/api/requestApi";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import { dateFormatter } from "@/utils/dateFormatter";
@@ -77,12 +79,12 @@ const BloodRequestModal = ({ open, setOpen, id }: TModalProps) => {
                 type="text"
               />
             </Grid>
-            <Grid item md={6}>
-              <PHInput
+            <Grid item xs={12} sm={12} md={6}>
+              <PHSelect
                 name="bloodType"
                 fullWidth={true}
                 label="Blood Type"
-                type="text"
+                item={bloodTypeItem}
               />
             </Grid>
             <Grid item md={6}>
@@ -130,7 +132,7 @@ const BloodRequestModal = ({ open, setOpen, id }: TModalProps) => {
             </Grid>
 
             <Button type="submit" fullWidth sx={{ my: 3 }}>
-              Register
+              Request
             </Button>
           </Grid>
         </PHForm>
