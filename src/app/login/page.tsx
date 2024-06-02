@@ -20,6 +20,8 @@ import PHForm from "@/Form/PHForm";
 import PHInput from "@/Form/PHInput";
 
 import { storeUserInfo } from "@/services/authService";
+import { getFromLocalStorage, setToLocalStorage } from "@/utils/localStorage";
+import { authKey } from "@/constant";
 
 const validationSchema = z.object({
   email: z.string().email("Enter a valid email address!"),
@@ -29,17 +31,15 @@ const validationSchema = z.object({
 const LoginPage = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
     try {
       const res = await loginDonor(data);
       if (res?.data?.accessToken) {
-        const token = res?.data?.accessToken;
-        storeUserInfo(token);
-        toast.success("User logged in successfully!");
-        router.push("/dashboard");
+        toast.success(res.message);
+        storeUserInfo(res?.data?.accessToken);
+        // router.push("/dashboard");
       } else {
         setError(res?.message);
       }

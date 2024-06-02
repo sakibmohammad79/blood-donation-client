@@ -14,9 +14,11 @@ const Sidebar = () => {
   const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
-    const { role } = getuserInfo() as any;
-    setUserRole(role);
-  }, []);
+    const userInfo = getuserInfo();
+    if (userInfo) {
+      setUserRole(userInfo?.role);
+    }
+  }, [userRole]);
 
   return (
     <Box sx={{ height: "100%", background: "#242424", color: "white" }}>

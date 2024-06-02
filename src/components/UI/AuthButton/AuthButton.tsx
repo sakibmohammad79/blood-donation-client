@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useEffect, useState } from "react";
+import { deleteCookies } from "@/services/actions/deleteCoockie";
+import { authKey } from "@/constant";
 
 const AuthButton = () => {
   const router = useRouter();
@@ -19,6 +21,7 @@ const AuthButton = () => {
 
   const handleLogOut = () => {
     removeUser();
+    deleteCookies([authKey]);
     router.push("/");
     router.refresh();
   };

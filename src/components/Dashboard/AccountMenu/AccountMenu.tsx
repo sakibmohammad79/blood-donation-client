@@ -12,6 +12,8 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useRouter } from "next/navigation";
 import { getuserInfo, removeUser } from "@/services/authService";
 import Link from "next/link";
+import { deleteCookies } from "@/services/actions/deleteCoockie";
+import { authKey } from "@/constant";
 
 export default function AccountMenu() {
   const [userRole, setUserRole] = React.useState("");
@@ -28,13 +30,17 @@ export default function AccountMenu() {
   const handleLogOut = () => {
     setAnchorEl(null);
     removeUser();
+    deleteCookies([authKey]);
     router.push("/");
   };
 
   React.useEffect(() => {
-    const { role } = getuserInfo() as any;
-    setUserRole(role);
-  }, []);
+    const userInfo = getuserInfo();
+    if (userInfo) {
+      setUserRole(userInfo?.role);
+    }
+  }, [userRole]);
+
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
