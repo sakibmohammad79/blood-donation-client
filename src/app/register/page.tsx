@@ -59,18 +59,17 @@ const RegisterPage = () => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FieldValues> = async (values) => {
-    //console.log(values);
     setIsLoading(true);
     try {
       const res = await registerDonor(values);
-      // console.log("register", res);
+
       if (res?.data?.id) {
         toast.success("Donor register successfully!");
         const result = await loginDonor({
           password: values?.password,
           email: values?.donor?.email,
         });
-        // console.log("login", result);
+
         if (result?.data?.accessToken) {
           const token = result?.data?.accessToken;
           storeUserInfo(token);

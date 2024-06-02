@@ -6,6 +6,20 @@ const donorApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllDonors: build.query({
       query: (arg: Record<string, any>) => ({
+        url: "/donor/all-donor",
+        method: "GET",
+        params: arg,
+      }),
+      transformResponse: (response: any, meta: TMeta) => {
+        return {
+          donor: response,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.donor],
+    }),
+    getAllDonorsWithoutMe: build.query({
+      query: (arg: Record<string, any>) => ({
         url: "/donor",
         method: "GET",
         params: arg,
@@ -56,4 +70,5 @@ export const {
   useGetSingleDonorQuery,
   useDonorUpdateMutation,
   useDeleteDonorMutation,
+  useGetAllDonorsWithoutMeQuery,
 } = donorApi;

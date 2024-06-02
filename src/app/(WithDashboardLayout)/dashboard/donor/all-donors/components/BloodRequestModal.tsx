@@ -28,9 +28,12 @@ const BloodRequestModal = ({ open, setOpen, id }: TModalProps) => {
 
     try {
       const res = await createBloodRequest(values).unwrap();
-      if (res.id) {
+
+      if (res?.id) {
         toast.success("Blood request send successfully!");
         setOpen(false);
+      } else {
+        toast.error("You have already sent a request to this user!");
       }
     } catch (error: any) {
       console.error(error.message);

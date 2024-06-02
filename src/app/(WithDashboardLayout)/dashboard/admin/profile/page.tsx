@@ -18,7 +18,6 @@ const AdminProfile = () => {
   const [isModalOpen, SetIsModalOpen] = useState(false);
 
   const fileUploadHandler = async (file: File) => {
-    console.log(file);
     const formData = new FormData();
     formData.append("image", file);
     try {

@@ -13,10 +13,9 @@ const PasswordChange = () => {
   const [changePassword] = useChangePasswordMutation();
   const router = useRouter();
   const onSubmit = async (values: FieldValues) => {
-    console.log(values);
     try {
       const res = await changePassword(values).unwrap();
-      console.log(res);
+
       if (res?.success === true) {
         removeUser();
         router.push("/");

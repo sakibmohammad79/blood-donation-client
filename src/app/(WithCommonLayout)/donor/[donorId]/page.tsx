@@ -16,7 +16,7 @@ import {
 const Page = ({ params }: any) => {
   const { donorId } = params;
   const { data } = useGetSingleDonorQuery(donorId);
-  console.log(data);
+
   return (
     <Container>
       <Box py={16}>

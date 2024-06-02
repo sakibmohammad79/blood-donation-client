@@ -4,11 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Donor = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/donor`, {
-    next: {
-      revalidate: 30,
-    },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/donor/all-donor`,
+    {
+      next: {
+        revalidate: 30,
+      },
+    }
+  );
 
   const { data: allDonor } = await res.json();
 
@@ -27,6 +30,8 @@ const Donor = async () => {
             <Card
               sx={{
                 display: "flex",
+                height: "250px",
+                width: "600px",
               }}
             >
               <Box>
@@ -84,7 +89,7 @@ const Donor = async () => {
                       {donor?.location}
                     </Box>
                   </Typography>
-                  <Box pt={1} component={Link} href={`/donor/${donor.id}`}>
+                  <Box mt={2} component={Link} href={`/donor/${donor.id}`}>
                     <Button style={{ padding: "8px 12px", fontSize: "16px" }}>
                       More
                     </Button>

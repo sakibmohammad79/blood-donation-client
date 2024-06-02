@@ -32,15 +32,14 @@ const DonorProfile = () => {
       }
 
       const result = await response.json();
-      console.log(result);
+
       const imageUrl = result?.data?.url;
-      console.log(imageUrl);
+
       if (imageUrl) {
         const res = await donorUpdate({
           id: data?.id,
           data: { photo: imageUrl },
         });
-        console.log(res);
       }
     } catch (error) {
       console.error("Error uploading to ImgBB:", error);

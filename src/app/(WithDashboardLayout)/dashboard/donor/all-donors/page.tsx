@@ -1,5 +1,5 @@
 "use client";
-import { useGetAllDonorsQuery } from "@/redux/api/donorApi";
+import { useGetAllDonorsWithoutMeQuery } from "@/redux/api/donorApi";
 import {
   Box,
   Button,
@@ -47,7 +47,7 @@ const AllDonorPage = () => {
     data: donors,
     isLoading,
     isError,
-  } = useGetAllDonorsQuery({ ...query });
+  } = useGetAllDonorsWithoutMeQuery({ ...query });
 
   const handleAvailability = (event: any) => {
     setAvailability(event.target.checked);
