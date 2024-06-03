@@ -1,7 +1,7 @@
 "use client";
 
 import { getuserInfo } from "@/services/authService";
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";

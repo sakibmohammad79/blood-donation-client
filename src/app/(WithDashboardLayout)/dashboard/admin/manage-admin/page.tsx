@@ -27,8 +27,11 @@ import CreateAdminModal from "./components/CreateAdminModal";
 const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 
 const ManageAdmin = () => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [isAdminModalOpen, setIsAdminModalOpen] = React.useState(false);
+
+  //update admin
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isAdminUpdateId, setAdminUpdateId] = React.useState("");
 
   const { data: admins, isLoading, isError } = useGetAllAdminQuery({});
   const [adminStatusUpdate] = useAdminStatusUpdateMutation();
@@ -62,6 +65,11 @@ const ManageAdmin = () => {
       </Typography>
     );
   }
+
+  const handleGetIdAndOpenUpdateModal = (id: string) => {
+    setAdminUpdateId(id);
+    setIsModalOpen(true);
+  };
 
   const rows =
     admins?.admin.map((admin: any) => {
@@ -107,16 +115,24 @@ const ManageAdmin = () => {
       flex: 1,
       renderCell: ({ row }) => (
         <Box>
-          <IconButton onClick={() => setIsModalOpen(true)}>
-            <EditIcon></EditIcon>
+          <IconButton>
+            <EditIcon
+              onClick={() => handleGetIdAndOpenUpdateModal(row?.id)}
+              fontSize="medium"
+              style={{ color: "green" }}
+            ></EditIcon>
             <AdminUPdateModal
-              id={row.id}
+              id={isAdminUpdateId}
               open={isModalOpen}
               setOpen={setIsModalOpen}
             ></AdminUPdateModal>
           </IconButton>
-          <IconButton onClick={() => handleAdminDelete(row.id)}>
-            <DeleteIcon></DeleteIcon>
+          <IconButton>
+            <DeleteIcon
+              onClick={() => handleAdminDelete(row.id)}
+              fontSize="medium"
+              style={{ color: "red" }}
+            ></DeleteIcon>
           </IconButton>
         </Box>
       ),

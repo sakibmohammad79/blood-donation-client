@@ -37,7 +37,6 @@ const AdminProfile = () => {
       const imageUrl = result?.data?.url;
       if (imageUrl) {
         const res = adminUpdate({ id: data?.id, body: { photo: imageUrl } });
-        console.log(res);
       }
     } catch (error) {
       console.error("Error uploading to ImgBB:", error);

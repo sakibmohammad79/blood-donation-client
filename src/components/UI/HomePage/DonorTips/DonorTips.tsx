@@ -1,12 +1,4 @@
-import {
-  Box,
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  Container,
-} from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { Box, Grid, Card, CardContent, Typography } from "@mui/material";
 import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import FoodBankIcon from "@mui/icons-material/FoodBank";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
@@ -78,12 +70,9 @@ const DonationTips = () => {
       <Typography variant="body1" gutterBottom>
         Here are some helpful tips to ensure a smooth and positive blood
         donation experience.
-        <Typography variant="body1" gutterBottom>
-          {" "}
-          Follow these guidelines before, during, and after your donation
-        </Typography>
-        {/* Follow these guidelines before, during, and after
-        your donation to stay healthy and make the most of your contribution. */}
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        Follow these guidelines before, during, and after your donation
       </Typography>
       <Box>
         {tips.map((section) => (
@@ -92,8 +81,6 @@ const DonationTips = () => {
               {section.category}
             </Typography>
             <Grid container spacing={2} justifyContent="center">
-              {" "}
-              {/* Here */}
               {section.tips.map((tip, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
                   <Card>

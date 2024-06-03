@@ -10,7 +10,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Avatar, Badge, Stack, Tooltip } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-// import AccountMenu from "../AccountMenu/AccountMenu";
 import Sidebar from "../Sidebar/Sidebar";
 import AccountMenu from "../AccountMenu/AccountMenu";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";

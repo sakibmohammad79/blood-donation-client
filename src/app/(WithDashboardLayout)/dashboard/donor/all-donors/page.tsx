@@ -58,6 +58,11 @@ const AllDonorPage = () => {
     setIsModalOpen(true);
   };
 
+  const handleGetIdAndModalOpen = (id: string) => {
+    setId(id);
+    setUpdateModalOpen(true);
+  };
+
   const columns: GridColDef[] = [
     { field: "name", headerName: "Name", flex: 1 },
     { field: "email", headerName: "Email", flex: 1 },
@@ -76,7 +81,8 @@ const AllDonorPage = () => {
         return (
           <IconButton>
             <BloodtypeIcon
-              style={{ color: "primary.main" }}
+              fontSize="medium"
+              style={{ color: "red" }}
               onClick={() => handleClick(row.id)}
             ></BloodtypeIcon>
             <BloodRequestModal
@@ -94,8 +100,12 @@ const AllDonorPage = () => {
       flex: 1,
       renderCell: ({ row }) => (
         <Box>
-          <IconButton onClick={() => setUpdateModalOpen(true)}>
-            <EditIcon></EditIcon>
+          <IconButton>
+            <EditIcon
+              fontSize="medium"
+              style={{ color: "green" }}
+              onClick={() => handleGetIdAndModalOpen(row.id)}
+            ></EditIcon>
             <DonorUpdateModal
               id={row.id}
               open={updateModalOpen}

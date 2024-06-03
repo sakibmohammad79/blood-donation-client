@@ -17,7 +17,6 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const accessToken = cookies().get(authKey)?.value;
-  console.log({ accessToken });
 
   if (!accessToken) {
     if (authRoutes.includes(pathname)) {

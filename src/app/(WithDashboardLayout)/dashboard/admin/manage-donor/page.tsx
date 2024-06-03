@@ -4,15 +4,7 @@ import {
   useDonorStatusUpdateMutation,
   useGetAllDonorsQuery,
 } from "@/redux/api/donorApi";
-import {
-  Box,
-  IconButton,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, MenuItem, Select, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -25,6 +17,7 @@ const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 
 const ManageDonor = () => {
   const [isModalOpen, SetIsModalOpen] = React.useState(false);
+  const [id, setId] = React.useState("");
 
   const { data: donors, isLoading, isError } = useGetAllDonorsQuery({});
   const [donorStatusUpdate] = useDonorStatusUpdateMutation();
@@ -73,6 +66,11 @@ const ManageDonor = () => {
       };
     }) || [];
 
+  const handleGetIdAndModalOpen = (id: string) => {
+    setId(id);
+    SetIsModalOpen(true);
+  };
+
   const columns: GridColDef[] = [
     { field: "name", headerName: "Name", flex: 1 },
     { field: "email", headerName: "Email", flex: 1 },
@@ -106,16 +104,24 @@ const ManageDonor = () => {
       flex: 1,
       renderCell: ({ row }) => (
         <Box>
-          <IconButton onClick={() => SetIsModalOpen(true)}>
-            <EditIcon></EditIcon>
+          <IconButton>
+            <EditIcon
+              fontSize="medium"
+              style={{ color: "green" }}
+              onClick={() => handleGetIdAndModalOpen(row?.id)}
+            ></EditIcon>
             <DonorUpdateModal
-              id={row.id}
+              id={id}
               open={isModalOpen}
               setOpen={SetIsModalOpen}
             ></DonorUpdateModal>
           </IconButton>
-          <IconButton onClick={() => handleDonorDelete(row.id)}>
-            <DeleteIcon></DeleteIcon>
+          <IconButton>
+            <DeleteIcon
+              onClick={() => handleDonorDelete(row.id)}
+              style={{ color: "red" }}
+              fontSize="medium"
+            ></DeleteIcon>
           </IconButton>
         </Box>
       ),

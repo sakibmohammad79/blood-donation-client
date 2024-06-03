@@ -3,19 +3,12 @@ import PHInput from "@/Form/PHInput";
 import { PHSelect } from "@/Form/PHSelect";
 
 import PHModal from "@/components/Shared/PHModal/PHModal";
-import { availabilityItems, bloodTypeItem, genderItem } from "@/constant";
+import { bloodTypeItem, genderItem } from "@/constant";
 import {
   useDonorUpdateMutation,
   useGetSingleDonorQuery,
 } from "@/redux/api/donorApi";
-import {
-  Box,
-  Button,
-  FormControlLabel,
-  Grid,
-  Input,
-  Switch,
-} from "@mui/material";
+import { Box, Button, FormControlLabel, Grid, Switch } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 
@@ -32,6 +25,7 @@ const DonorUpdateModal = ({ open, setOpen, id }: TModalProps) => {
   };
 
   const { data } = useGetSingleDonorQuery(id);
+
   const [updateDonor, { isLoading }] = useDonorUpdateMutation();
 
   useEffect(() => {
@@ -52,7 +46,7 @@ const DonorUpdateModal = ({ open, setOpen, id }: TModalProps) => {
   const handeDonorUpdate = async (values: FieldValues) => {
     values.availability = isChecked;
     try {
-      const res = await updateDonor({ id: id, data: values }).unwrap();
+      const res = await updateDonor({ id: data?.id, data: values }).unwrap();
       if (res?.id) {
         setOpen(false);
       }

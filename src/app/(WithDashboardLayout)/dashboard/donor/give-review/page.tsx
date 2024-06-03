@@ -76,7 +76,7 @@ const Page = () => {
                   <PHInput
                     name="details"
                     fullWidth={true}
-                    label="Details"
+                    label="Feedback"
                     type="text"
                     size="medium"
                   />
@@ -95,7 +95,7 @@ const Page = () => {
                   sx={{ my: 3 }}
                   disabled={isLoading}
                 >
-                  Please Register
+                  Send
                 </Button>
                 {isLoading && (
                   <CircularProgress
