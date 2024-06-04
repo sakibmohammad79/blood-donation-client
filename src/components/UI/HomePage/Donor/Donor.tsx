@@ -1,19 +1,22 @@
-"use server";
+"use client";
+import { useGetAllDonorsQuery } from "@/redux/api/donorApi";
 import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 
-const Donor = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/donor/all-donor`,
-    {
-      next: {
-        revalidate: 30,
-      },
-    }
-  );
+const Donor = () => {
+  // const res = await fetch(
+  //   `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/donor/all-donor`,
+  //   {
+  //     next: {
+  //       revalidate: 30,
+  //     },
+  //   }
+  // );
 
-  const { data: allDonor } = await res.json();
+  // const { data: allDonor } = await res.json();
+  const { data } = useGetAllDonorsQuery({});
+  const allDonor = data?.donor;
 
   return (
     <Box py={16}>

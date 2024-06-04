@@ -8,6 +8,8 @@ import PHInput from "@/Form/PHInput";
 import { useChangePasswordMutation } from "@/redux/api/authApi";
 import { FieldValues } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { deleteCookies } from "@/services/actions/deleteCoockie";
+import { authKey } from "@/constant";
 const PasswordChange = () => {
   const [changePassword] = useChangePasswordMutation();
   const router = useRouter();
@@ -17,6 +19,7 @@ const PasswordChange = () => {
 
       if (res?.success === true) {
         removeUser();
+        deleteCookies([authKey]);
         router.push("/");
         toast.success("Password Changed Successfully");
       } else {
