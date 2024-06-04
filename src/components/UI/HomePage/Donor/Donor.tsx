@@ -36,7 +36,6 @@ const Donor = async () => {
             >
               <Box>
                 <Image
-                  //src={donor?.photo}
                   src={
                     donor?.photo ||
                     "https://i.postimg.cc/43gT3HP6/pngtree-user-icon-isolated-on-abstract-background-png-image-5192004.jpg"
