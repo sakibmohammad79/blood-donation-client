@@ -84,13 +84,7 @@ const Review = () => {
                             background: "white",
                           }}
                         >
-                          <Box
-                            display="flex"
-                            alignItems="center"
-                            gap={4}
-                            height="400px"
-                            width="100%"
-                          >
+                          <Box display="flex" alignItems="center" gap={4}>
                             <Image
                               src={
                                 secondReview?.photo ||
