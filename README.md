@@ -11,7 +11,9 @@ User authentication: Registration, login, and logout functionalities.
 User management: Create, view, and update user profiles (donors and recipients).
 Blood request management: Create, view, and manage blood requests (including search functionality).
 Blood donor search: Search for blood donors based on various criteria.
-(Add more features as applicable)
+
+You can view the live application at: https://blood-donation-client-one.vercel.app/
+
 3. Prerequisites
 
 Node.js and npm (or yarn) installed on your system (download from https://nodejs.org/).
