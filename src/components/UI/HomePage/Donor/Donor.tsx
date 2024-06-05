@@ -5,16 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Donor = () => {
-  // const res = await fetch(
-  //   `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/donor/all-donor`,
-  //   {
-  //     next: {
-  //       revalidate: 30,
-  //     },
-  //   }
-  // );
-
-  // const { data: allDonor } = await res.json();
   const { data } = useGetAllDonorsQuery({});
   const allDonor = data?.donor;
 
