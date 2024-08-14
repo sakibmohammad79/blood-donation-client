@@ -30,11 +30,8 @@ const DonorProfile = () => {
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
-
       const result = await response.json();
-
       const imageUrl = result?.data?.url;
-
       if (imageUrl) {
         const res = await donorUpdate({
           id: data?.id,

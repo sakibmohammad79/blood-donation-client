@@ -5,7 +5,6 @@ import {
   Button,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardMedia,
   Container,
@@ -24,8 +23,11 @@ const Page = ({ params }: any) => {
           <CardActionArea>
             <CardMedia
               component="img"
-              height="140"
-              image="https://i.postimg.cc/BnmsxfQ5/pexels-designecologist-1779487.jpg"
+              height="500px"
+              image={
+                data?.photo ||
+                "https://i.postimg.cc/BnmsxfQ5/pexels-designecologist-1779487.jpg"
+              }
               alt="green iguana"
             />
             <CardContent>
