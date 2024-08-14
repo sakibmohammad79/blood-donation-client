@@ -52,13 +52,13 @@ const BloodRequestMe = () => {
       headerName: "Requester Name",
       flex: 1,
     },
-    { field: "bloodType", headerName: "Blood Type", flex: 1 },
-    { field: "requestDate", headerName: "Request Date", flex: 1 },
-    { field: "bloodNeedDetails", headerName: "Need Details", flex: 1 },
+    { field: "bloodType", headerName: "Blood Type", width: 150 },
+    { field: "requestDate", headerName: "Request Date", width: 150 },
+    { field: "bloodNeedDetails", headerName: "Need Details", width: 150 },
     {
       field: "status",
       headerName: "Status",
-      flex: 1,
+      width: 150,
       renderCell: (params) => (
         <Select
           sx={{ width: "150px" }}
@@ -78,7 +78,7 @@ const BloodRequestMe = () => {
     {
       field: "userInfo",
       headerName: "User Info",
-      flex: 4,
+      width: 450,
       renderCell: (params) =>
         params.row.status === "APPROVED" ? (
           <>

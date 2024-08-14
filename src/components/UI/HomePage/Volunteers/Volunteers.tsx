@@ -28,7 +28,12 @@ const Volunteers = () => {
     >
       <Container>
         <Box pb={8} textAlign="center">
-          <Typography variant="h4" component="h4" fontWeight={600}>
+          <Typography
+            sx={{
+              fontSize: { xs: 30, sm: 30, md: 40, lg: 45, xl: 45 },
+            }}
+            fontWeight={600}
+          >
             OUR VOLUNTEERS
           </Typography>
           <Typography>

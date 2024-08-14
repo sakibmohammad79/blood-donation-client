@@ -13,7 +13,13 @@ const Review = () => {
   return (
     <Box sx={{ background: "#1B373B", color: "white", py: 18 }}>
       <Box pb={10} textAlign="center">
-        <Typography variant="h4" component="h4" fontWeight={600}>
+        <Typography
+          sx={{
+            fontSize: { xs: 30, sm: 30, md: 40, lg: 45, xl: 45 },
+            color: "white",
+          }}
+          fontWeight={600}
+        >
           Our Donors and Recipients Say
         </Typography>
         <Typography color="white">

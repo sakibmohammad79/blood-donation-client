@@ -64,17 +64,17 @@ const AllDonorPage = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: "name", headerName: "Name", flex: 1 },
-    { field: "email", headerName: "Email", flex: 1 },
-    { field: "bloodType", headerName: "Blood Type", flex: 1 },
-    { field: "location", headerName: "Location", flex: 1 },
-    { field: "contactNumber", headerName: "Contact Number", flex: 1 },
-    { field: "availability", headerName: "Availability", flex: 1 },
+    { field: "name", headerName: "Name", width: 150 },
+    { field: "email", headerName: "Email", width: 150 },
+    { field: "bloodType", headerName: "Blood Type", width: 150 },
+    { field: "location", headerName: "Location", width: 150 },
+    { field: "contactNumber", headerName: "Contact Number", width: 150 },
+    { field: "availability", headerName: "Availability", width: 150 },
 
     {
       field: "action",
       headerName: "Request",
-      flex: 1,
+      width: 150,
       headerAlign: "center",
       align: "center",
       renderCell: ({ row }) => {
@@ -97,7 +97,7 @@ const AllDonorPage = () => {
     {
       field: "actions",
       headerName: "Action",
-      flex: 1,
+      width: 150,
       renderCell: ({ row }) => (
         <Box>
           <IconButton>

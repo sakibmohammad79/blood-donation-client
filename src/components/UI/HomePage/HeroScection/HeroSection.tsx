@@ -9,11 +9,11 @@ const HeroSection = () => {
           "url(https://i.postimg.cc/C12N0QmW/home-1-slider-1.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        minHeight: "100vh", // Adjust as needed
+        minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        color: "white", // Ensure text is readable
+        color: "white",
         filter: "brightness(0.8)",
       }}
     >
@@ -23,14 +23,31 @@ const HeroSection = () => {
         alignContent="center"
         textAlign="center"
       >
-        <Typography variant="h3" component="h3" fontWeight={600}>
+        <Typography
+          sx={{
+            fontSize: { xs: 30, sm: 30, md: 40, lg: 60, xl: 60 },
+            color: "white",
+          }}
+          fontWeight={600}
+        >
           DONATE BLOOD AND GET REAL BLESSINGS.
         </Typography>
-        <Typography variant="h5" component="h5" pt={1}>
+        <Typography
+          sx={{
+            fontSize: { xs: 16, sm: 16, md: 18, lg: 20, xl: 20 },
+            color: "white",
+          }}
+          pt={1}
+        >
           Blood is the most precious gift that anyone can give to another
           person.
         </Typography>
-        <Typography variant="h5" component="h5">
+        <Typography
+          sx={{
+            fontSize: { xs: 16, sm: 16, md: 18, lg: 20, xl: 20 },
+            color: "white",
+          }}
+        >
           Donating blood not only saves the life also save donor’s lives.
         </Typography>
         <Box pt={2} component={Link} href="/all-donor">

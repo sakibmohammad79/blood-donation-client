@@ -97,7 +97,7 @@ const LoginPage = () => {
               defaultValues={{ email: "", password: "" }}
             >
               <Grid container spacing={2}>
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
                   <PHInput
                     fullWidth={true}
                     label="Email"
@@ -105,7 +105,7 @@ const LoginPage = () => {
                     type="text"
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
                   <PHInput
                     fullWidth={true}
                     label="Password"

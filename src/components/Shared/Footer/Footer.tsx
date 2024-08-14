@@ -14,17 +14,12 @@ const Footer = () => {
           <Typography color="white" component={Link} href="/consultation">
             Home
           </Typography>
-          <Typography color="white" component={Link} href="/healthplans">
-            Health Plans
-          </Typography>
+
           <Typography color="white" component={Link} href="/medicine">
             About
           </Typography>
           <Typography color="white" component={Link} href="/diagonistics">
             Profile
-          </Typography>
-          <Typography color="white" component={Link} href="/ngos">
-            NGOs
           </Typography>
         </Stack>
         <Stack direction="row" justifyContent="center" gap={2} py={3}>
@@ -64,7 +59,7 @@ const Footer = () => {
         </Stack>
         <Box sx={{ border: "1px dashed lightgray" }}></Box>
         <Stack
-          direction="row"
+          sx={{ direction: { xs: "col", sm: "col", md: "row", lg: "row" } }}
           py={2}
           justifyContent="space-between"
           alignItems="center"

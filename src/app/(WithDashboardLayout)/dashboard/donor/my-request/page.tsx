@@ -32,14 +32,14 @@ const MyBloodRequest = () => {
   }, [data]);
 
   const columns: GridColDef[] = [
-    { field: "requesterName", headerName: "My Name", flex: 1 },
-    { field: "bloodType", headerName: "Blood Type", flex: 1 },
-    { field: "requestDate", headerName: "Request Date", flex: 1 },
-    { field: "status", headerName: "Status", flex: 1 },
+    { field: "requesterName", headerName: "My Name", width: 150 },
+    { field: "bloodType", headerName: "Blood Type", width: 150 },
+    { field: "requestDate", headerName: "Request Date", width: 150 },
+    { field: "status", headerName: "Status", width: 150 },
     {
       field: "donorInfo",
       headerName: "Donor Info",
-      flex: 5,
+      width: 450,
       renderCell: (params) => (
         <>
           {params.row.status === "APPROVED" ? (

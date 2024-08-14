@@ -1,14 +1,10 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 
 const History = () => {
   return (
     <Container sx={{ my: 12 }}>
       <Grid
         container
-        spacing={2}
-        direction="row"
-        justifyContent="space-around"
-        alignItems="center"
         boxShadow={1}
         padding={6}
         borderRadius={4}
@@ -19,7 +15,7 @@ const History = () => {
           backgroundSize: "100% 100%",
         }}
       >
-        <Grid item sm={12} md={6} lg={3} textAlign="center">
+        <Grid item pb={2} xs={12} sm={12} md={6} lg={3} textAlign="center">
           <Typography variant="h3" component="h6">
             30+
           </Typography>
@@ -27,7 +23,7 @@ const History = () => {
             Expert Volunteers
           </Typography>
         </Grid>
-        <Grid item sm={12} md={6} lg={3} textAlign="center">
+        <Grid item pb={2} xs={12} sm={12} md={6} lg={3} textAlign="center">
           <Typography variant="h3" component="h6">
             130+
           </Typography>
@@ -35,7 +31,7 @@ const History = () => {
             Blood Donors
           </Typography>
         </Grid>
-        <Grid item sm={12} md={6} lg={3} textAlign="center">
+        <Grid item pb={2} xs={12} sm={12} md={6} lg={3} textAlign="center">
           <Typography variant="h3" component="h6">
             120+
           </Typography>
@@ -43,7 +39,7 @@ const History = () => {
             Happy Patients
           </Typography>
         </Grid>
-        <Grid item sm={12} md={6} lg={3} textAlign="center">
+        <Grid item pb={2} xs={12} sm={12} md={6} lg={3} textAlign="center">
           <Typography variant="h3" component="h6">
             150+
           </Typography>

@@ -12,7 +12,7 @@ import aboutImage from "../../../../assets/landing_page/about_image.webp";
 const WhoSection = () => {
   return (
     <Container>
-      <Box my={16}>
+      <Box sx={{ py: { xs: 10, sm: 10, md: 10, lg: 16, xl: 16 } }}>
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={6}>
             <Box
@@ -21,7 +21,6 @@ const WhoSection = () => {
                 borderRadius: 1,
                 boxShadow: 2,
                 padding: 4,
-                mt: 8,
               }}
             >
               <Typography

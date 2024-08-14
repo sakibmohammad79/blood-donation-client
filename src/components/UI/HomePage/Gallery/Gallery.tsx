@@ -15,9 +15,14 @@ const Gallery = () => {
     galleryImage5,
   ];
   return (
-    <Box py={16} sx={{ background: "#F9FAFB" }}>
-      <Box pb={8} textAlign="center">
-        <Typography variant="h4" component="h4" fontWeight={600}>
+    <Container>
+      <Box pb={6} textAlign="center">
+        <Typography
+          sx={{
+            fontSize: { xs: 30, sm: 30, md: 40, lg: 45, xl: 45 },
+          }}
+          fontWeight={600}
+        >
           CAMPAIGN GALLERY
         </Typography>
         <Typography>
@@ -25,28 +30,21 @@ const Gallery = () => {
         </Typography>
       </Box>
       <Box>
-        <Grid container spacing={2} mx="auto" maxWidth="lg">
+        <Grid container spacing={2} px={2}>
           {images.map((image, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Box
-                sx={{
-                  position: "relative",
-                  width: "100%",
-                  paddingBottom: "100%",
-                }}
-              >
+            <Grid item xs={12} sm={12} md={6} lg={4} key={index}>
+              <Box sx={{}}>
                 <Image
                   src={image}
+                  height={300}
                   alt={`Gallery Image ${index + 1}`}
-                  layout="fill"
-                  objectFit="cover"
                 />
               </Box>
             </Grid>
           ))}
         </Grid>
       </Box>
-    </Box>
+    </Container>
   );
 };
 

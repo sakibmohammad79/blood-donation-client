@@ -62,7 +62,7 @@ const Page = () => {
               //   resolver={zodResolver(donorRegisterValidationSchema)}
             >
               <Grid container spacing={2}>
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={12} lg={6}>
                   <PHInput
                     name="rating"
                     fullWidth={true}
@@ -72,7 +72,7 @@ const Page = () => {
                   />
                 </Grid>
 
-                <Grid item md={6}>
+                <Grid item xs={12} sm={12} md={12} lg={6}>
                   <PHInput
                     name="details"
                     fullWidth={true}

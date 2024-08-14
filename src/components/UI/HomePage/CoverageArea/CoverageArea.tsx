@@ -5,8 +5,13 @@ export default function Home() {
   return (
     <Box>
       <Box pb={8} textAlign="center">
-        <Typography variant="h4" component="h4" fontWeight={600}>
-          Our Blood Donation Coverage Area
+        <Typography
+          sx={{
+            fontSize: { xs: 30, sm: 30, md: 40, lg: 45, xl: 45 },
+          }}
+          fontWeight={600}
+        >
+          Our Blood Donation Area
         </Typography>
         <Typography>
           Explore our map below to find the nearest blood donation center.

@@ -4,6 +4,20 @@ import { baseApi } from "./baseApi";
 
 const requestApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
+    allBloodRequest: build.query({
+      query: () => ({
+        url: "/request",
+        method: "GET",
+      }),
+      providesTags: [tagTypes.request],
+    }),
+    allApprovedBloodRequest: build.query({
+      query: () => ({
+        url: "/request/approved",
+        method: "GET",
+      }),
+      providesTags: [tagTypes.request],
+    }),
     createBloodRequest: build.mutation({
       query: (data) => ({
         url: "/request",
@@ -54,6 +68,8 @@ const requestApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useAllBloodRequestQuery,
+  useAllApprovedBloodRequestQuery,
   useCreateBloodRequestMutation,
   useGetAllOfferedMeRequestQuery,
   useGetAllMyBloodRequestQuery,
