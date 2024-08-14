@@ -157,6 +157,9 @@ const LoginPage = () => {
                 <Box color="primary.main" component="span">
                   <Link href="/register">Create account</Link>
                 </Box>
+                <Box pt={2}>
+                  <Button>Demo Credentials</Button>
+                </Box>
               </Typography>
             </PHForm>
           </Box>
