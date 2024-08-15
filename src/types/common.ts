@@ -41,5 +41,3 @@ export type IGenericErrorMessage = {
   path: string | number;
   message: string;
 };
-
-//https://blood-care.vercel.app

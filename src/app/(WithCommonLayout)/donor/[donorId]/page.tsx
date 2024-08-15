@@ -15,6 +15,7 @@ import {
 const Page = ({ params }: any) => {
   const { donorId } = params;
   const { data } = useGetSingleDonorQuery(donorId);
+  console.log(data);
 
   return (
     <Container>
@@ -24,11 +25,8 @@ const Page = ({ params }: any) => {
             <CardMedia
               component="img"
               height="500px"
-              image={
-                data?.photo ||
-                "https://i.postimg.cc/BnmsxfQ5/pexels-designecologist-1779487.jpg"
-              }
-              alt="green iguana"
+              image={data?.photo}
+              alt="donor image"
             />
             <CardContent>
               <Grid spacing={2} mt={1} container>

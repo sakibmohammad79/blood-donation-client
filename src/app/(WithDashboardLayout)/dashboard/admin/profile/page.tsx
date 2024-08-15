@@ -7,7 +7,10 @@ import { CloudUpload as CloudUploadIcon } from "@mui/icons-material";
 import { FieldValues } from "react-hook-form";
 import AutoFileUploader from "@/Form/AutoFileUploader";
 import axios from "axios";
-import { useAdminUpdateMutation } from "@/redux/api/adminApi";
+import {
+  useAdminUpdateMutation,
+  useGetSingleAdminQuery,
+} from "@/redux/api/adminApi";
 import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import AdminUPdateModal from "./components/AdminUpdateModal";

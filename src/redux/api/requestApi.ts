@@ -39,7 +39,7 @@ const requestApi = baseApi.injectEndpoints({
           meta,
         };
       },
-      providesTags: [tagTypes.request],
+      providesTags: [tagTypes.myRequest],
     }),
     getAllOfferedMeRequest: build.query({
       query: (arg: Record<string, any>) => ({
@@ -48,7 +48,7 @@ const requestApi = baseApi.injectEndpoints({
         params: arg,
       }),
 
-      providesTags: [tagTypes.request],
+      providesTags: [tagTypes.offerRequest],
     }),
     getSingleBloodRequestReceiver: build.query({
       query: (id) => ({

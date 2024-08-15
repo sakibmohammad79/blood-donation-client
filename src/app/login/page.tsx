@@ -11,17 +11,14 @@ import {
 import Link from "next/link";
 import { SubmitHandler, FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import React, { useState } from "react";
 import { loginDonor } from "@/services/actions/loginDonor";
 import PHForm from "@/Form/PHForm";
 import PHInput from "@/Form/PHInput";
-
 import { storeUserInfo } from "@/services/authService";
-import { getFromLocalStorage, setToLocalStorage } from "@/utils/localStorage";
-import { authKey } from "@/constant";
+import LoginModal from "./components/LoginModal";
 
 const validationSchema = z.object({
   email: z.string().email("Enter a valid email address!"),
@@ -31,6 +28,7 @@ const validationSchema = z.object({
 const LoginPage = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
@@ -158,7 +156,13 @@ const LoginPage = () => {
                   <Link href="/register">Create account</Link>
                 </Box>
                 <Box pt={2}>
-                  <Button>Demo Credentials</Button>
+                  <Button onClick={() => setIsModalOpen(true)}>
+                    Demo Credentials
+                  </Button>
+                  <LoginModal
+                    open={isModalOpen}
+                    setOpen={setIsModalOpen}
+                  ></LoginModal>
                 </Box>
               </Typography>
             </PHForm>
