@@ -1,6 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
+
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -16,6 +16,7 @@ import Link from "next/link";
 import { deleteCookies } from "@/services/actions/deleteCoockie";
 import { authKey } from "@/constant";
 import { Stack, Typography } from "@mui/material";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
 
 export default function AccountMenu() {
   const [userRole, setUserRole] = React.useState("");
@@ -95,21 +96,23 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose} href="/">
-          <ListItemIcon>
-            <HomeIcon fontSize="small" />
-          </ListItemIcon>
-          Home
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Box component={Link} href={`/dashboard/${userRole}/profile`}>
-            <Stack justifyContent="space-between" alignItems="center">
-              <Avatar /> <Typography>Profile</Typography>
-            </Stack>
-          </Box>
-        </MenuItem>
+        <Link href="/">
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <HomeIcon fontSize="small" />
+            </ListItemIcon>
+            Home
+          </MenuItem>
+        </Link>
+        <Link href={`/dashboard/${userRole}/profile`}>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <HomeIcon fontSize="small" />
+            </ListItemIcon>
+            Profile
+          </MenuItem>
+        </Link>
         <Divider />
-
         <MenuItem onClick={handleLogOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
