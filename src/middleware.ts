@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getFromLocalStorage } from "./utils/localStorage";
+
 import { authKey } from "./constant";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";

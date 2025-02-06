@@ -22,8 +22,9 @@ const AuthButton = () => {
   const handleLogOut = () => {
     removeUser();
     deleteCookies([authKey]);
-    router.push("/");
+    setUserId("");
     router.refresh();
+    router.push("/");
   };
   return (
     <>
