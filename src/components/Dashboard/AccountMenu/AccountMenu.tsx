@@ -8,12 +8,14 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
+import HomeIcon from "@mui/icons-material/Home";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useRouter } from "next/navigation";
 import { getuserInfo, removeUser } from "@/services/authService";
 import Link from "next/link";
 import { deleteCookies } from "@/services/actions/deleteCoockie";
 import { authKey } from "@/constant";
+import { Stack, Typography } from "@mui/material";
 
 export default function AccountMenu() {
   const [userRole, setUserRole] = React.useState("");
@@ -93,12 +95,21 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
+        <MenuItem onClick={handleClose} href="/">
+          <ListItemIcon>
+            <HomeIcon fontSize="small" />
+          </ListItemIcon>
+          Home
+        </MenuItem>
         <MenuItem onClick={handleClose}>
           <Box component={Link} href={`/dashboard/${userRole}/profile`}>
-            <Avatar /> Profile
+            <Stack justifyContent="space-between" alignItems="center">
+              <Avatar /> <Typography>Profile</Typography>
+            </Stack>
           </Box>
         </MenuItem>
         <Divider />
+
         <MenuItem onClick={handleLogOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
