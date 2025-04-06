@@ -107,7 +107,7 @@ export default function AccountMenu() {
         <Link href={`/dashboard/${userRole}/profile`}>
           <MenuItem onClick={handleClose}>
             <ListItemIcon>
-              <HomeIcon fontSize="small" />
+              <PersonPinIcon fontSize="small" />
             </ListItemIcon>
             Profile
           </MenuItem>
