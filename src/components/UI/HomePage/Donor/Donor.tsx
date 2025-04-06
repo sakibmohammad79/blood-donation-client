@@ -37,7 +37,7 @@ const Donor = () => {
               sx={{
                 display: "flex",
                 flexDirection: { xs: "column", md: "row" },
-                alignItems: "center",
+                alignItems: "stretch",
                 boxShadow: 3,
                 borderRadius: 2,
                 overflow: "hidden",
@@ -49,9 +49,9 @@ const Donor = () => {
             >
               <Box
                 sx={{
-                  position: "relative",
                   width: { xs: "100%", md: 200 },
                   height: { xs: 200, md: 160 },
+                  position: "relative",
                   flexShrink: 0,
                 }}
               >
@@ -61,12 +61,25 @@ const Donor = () => {
                     "https://i.postimg.cc/43gT3HP6/pngtree-user-icon-isolated-on-abstract-background-png-image-5192004.jpg"
                   }
                   alt="donorImage"
-                  fill
-                  style={{ objectFit: "cover" }}
+                  width={500}
+                  height={400}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
                 />
               </Box>
 
-              <CardContent sx={{ flex: 1 }}>
+              <CardContent
+                sx={{
+                  flex: 1,
+                  textAlign: "left",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
                 <Typography variant="h6">
                   Name:{" "}
                   <Box color="text.secondary" component="span">
