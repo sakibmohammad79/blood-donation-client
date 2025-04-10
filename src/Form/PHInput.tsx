@@ -9,6 +9,9 @@ type TPhInputProps = {
   placeholder?: string;
   required?: boolean;
   sx?: SxProps;
+  multiline?: boolean;
+  rules?: any;
+  rows?: number;
 };
 const PHInput = ({
   name,
@@ -18,12 +21,16 @@ const PHInput = ({
   fullWidth,
   sx,
   required,
+  multiline,
+  rules,
+  rows
 }: TPhInputProps) => {
   const { control } = useFormContext();
   return (
     <Controller
       control={control}
       name={name}
+      rules={rules}
       render={({ field, fieldState: { error } }) => (
         <TextField
           sx={{ ...sx }}
@@ -37,6 +44,8 @@ const PHInput = ({
           required={required}
           error={!!error?.message}
           helperText={error?.message}
+          multiline={multiline}
+          rows={rows}
         >
           {" "}
         </TextField>
