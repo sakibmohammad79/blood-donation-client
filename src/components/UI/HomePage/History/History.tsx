@@ -2,7 +2,7 @@ import { Container, Grid, Typography } from "@mui/material";
 
 const History = () => {
   return (
-    <Container sx={{ my: 12 }}>
+    <Container sx={{ mt: 6, mb: 16 }}>
       <Grid
         container
         boxShadow={1}

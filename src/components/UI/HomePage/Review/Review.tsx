@@ -12,128 +12,90 @@ const Review = () => {
 
   return (
     <Box sx={{ background: "#1B373B", color: "white", py: 18 }}>
-      <Box pb={10} textAlign="center">
-        <Typography
-          sx={{
-            fontSize: { xs: 30, sm: 30, md: 40, lg: 45, xl: 45 },
-            color: "white",
-          }}
-          fontWeight={600}
-        >
-          Our Donors and Recipients Say
-        </Typography>
-        <Typography color="white">
-          We deeply value the experiences and feedback of our donors and
-          recipients.
-        </Typography>
-      </Box>
-      <Swiper spaceBetween={30} pagination={{ clickable: true }}>
-        {Array.from(
-          { length: Math.ceil(reviewData.length / 2) },
-          (_, index) => {
-            const firstReview = reviewData[index * 2];
-            const secondReview = reviewData[index * 2 + 1];
-            return (
-              <SwiperSlide key={index}>
-                <Container>
+      <Container>
+        {/* Section Title */}
+        <Box pb={10} textAlign="center">
+          <Typography
+            sx={{
+              fontSize: { xs: 30, sm: 30, md: 40, lg: 45, xl: 45 },
+              color: "white",
+            }}
+            fontWeight={600}
+          >
+            Our Donors and Recipients Say
+          </Typography>
+          <Typography color="white">
+            We deeply value the experiences and feedback of our donors and recipients.
+          </Typography>
+        </Box>
+
+        {/* Swiper Section */}
+        <Swiper spaceBetween={30} pagination={{ clickable: true }}>
+          {Array.from(
+            { length: Math.ceil(reviewData.length / 2) },
+            (_, index) => {
+              const firstReview = reviewData[index * 2];
+              const secondReview = reviewData[index * 2 + 1];
+              return (
+                <SwiperSlide key={index}>
                   <Grid container spacing={4}>
-                    <Grid item xs={12} sm={12} md={6} lg={6}>
-                      {firstReview && (
-                        <Box
-                          sx={{
-                            padding: 6,
-                            background: "white",
-                          }}
-                        >
-                          <Box display="flex" alignItems="center" gap={4}>
-                            <Image
-                              src={
-                                firstReview?.photo ||
-                                "https://i.postimg.cc/43gT3HP6/pngtree-user-icon-isolated-on-abstract-background-png-image-5192004.jpg"
-                              }
-                              alt="Review Image"
-                              height={150}
-                              width={150}
-                              style={{ borderRadius: "50%" }}
-                            />
-                            <Box>
-                              <Typography variant="h5" color="black">
-                                {firstReview?.name}
-                              </Typography>
-                              <Typography
-                                sx={{ py: 1 }}
-                                variant="h6"
-                                color="GrayText"
-                              >
-                                {firstReview?.address}
-                              </Typography>
-                              <Rating
-                                name="read-only"
-                                value={firstReview?.rating}
-                                readOnly
+                    {[firstReview, secondReview].map((review, i) =>
+                      review ? (
+                        <Grid item xs={12} md={6} key={i}>
+                          <Box
+                            sx={{
+                              padding: 4,
+                              background: "white",
+                              borderRadius: 3,
+                              height: "100%",
+                              boxShadow: 3,
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <Box display="flex" alignItems="center" gap={3}>
+                              <Image
+                                src={
+                                  review?.photo ||
+                                  "https://i.postimg.cc/43gT3HP6/pngtree-user-icon-isolated-on-abstract-background-png-image-5192004.jpg"
+                                }
+                                alt="Review Image"
+                                height={80}
+                                width={80}
+                                style={{ borderRadius: "50%", objectFit: "cover" }}
                               />
+                              <Box>
+                                <Typography variant="h6" color="black" fontWeight={600}>
+                                  {review?.name}
+                                </Typography>
+                                <Typography variant="body2" color="GrayText">
+                                  {review?.address}
+                                </Typography>
+                                <Rating
+                                  name="read-only"
+                                  value={review?.rating}
+                                  readOnly
+                                  size="small"
+                                />
+                              </Box>
+                            </Box>
+                            <Box mt={2}>
+                              <Typography variant="body1" color="GrayText">
+                                {review?.details}
+                              </Typography>
                             </Box>
                           </Box>
-                          <Box mt={3}>
-                            <Typography variant="h6" color="GrayText">
-                              {firstReview?.details}
-                            </Typography>
-                          </Box>
-                        </Box>
-                      )}
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={6} lg={6}>
-                      {secondReview && (
-                        <Box
-                          sx={{
-                            padding: 6,
-                            background: "white",
-                          }}
-                        >
-                          <Box display="flex" alignItems="center" gap={4}>
-                            <Image
-                              src={
-                                secondReview?.photo ||
-                                "https://i.postimg.cc/43gT3HP6/pngtree-user-icon-isolated-on-abstract-background-png-image-5192004.jpg"
-                              }
-                              alt="Review Image"
-                              height={150}
-                              width={150}
-                              style={{ borderRadius: "50%" }}
-                            />
-                            <Box>
-                              <Typography variant="h5" color="black">
-                                {secondReview?.name}
-                              </Typography>
-                              <Typography
-                                sx={{ py: 1 }}
-                                variant="h6"
-                                color="GrayText"
-                              >
-                                {secondReview?.address}
-                              </Typography>
-                              <Rating
-                                name="read-only"
-                                value={secondReview?.rating}
-                                readOnly
-                              />
-                            </Box>
-                          </Box>
-                          <Box mt={3}>
-                            <Typography variant="h6" color="GrayText">
-                              {secondReview?.details}
-                            </Typography>
-                          </Box>
-                        </Box>
-                      )}
-                    </Grid>
+                        </Grid>
+                      ) : null
+                    )}
                   </Grid>
-                </Container>
-              </SwiperSlide>
-            );
-          }
-        )}
-      </Swiper>
+                </SwiperSlide>
+              );
+            }
+          )}
+        </Swiper>
+      </Container>
     </Box>
   );
 };

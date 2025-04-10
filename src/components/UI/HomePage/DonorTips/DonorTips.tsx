@@ -1,4 +1,4 @@
-import { Box, Grid, Card, CardContent, Typography } from "@mui/material";
+import { Box, Grid, Card, CardContent, Typography, Container } from "@mui/material";
 import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import FoodBankIcon from "@mui/icons-material/FoodBank";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
@@ -63,7 +63,8 @@ const tips = [
 
 const DonationTips = () => {
   return (
-    <Box padding={2} py={14} textAlign="center">
+    <Container>
+    <Box  pb={8} textAlign="center">
       <Typography variant="h4" gutterBottom>
         Donation Tips
       </Typography>
@@ -82,7 +83,7 @@ const DonationTips = () => {
             </Typography>
             <Grid container spacing={2} justifyContent="center">
               {section.tips.map((tip, index) => (
-                <Grid item xs={12} sm={6} md={4} key={index}>
+                <Grid item xs={12} sm={12} md={6} key={index}>
                   <Card>
                     <CardContent>
                       <Box>
@@ -107,6 +108,7 @@ const DonationTips = () => {
         ))}
       </Box>
     </Box>
+    </Container>
   );
 };
 

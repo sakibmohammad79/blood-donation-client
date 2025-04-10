@@ -17,7 +17,7 @@ const Donor = () => {
   const allDonor = data?.donor;
 
   return (
-    <Container sx={{ py: 10 }}>
+    <Container maxWidth="xl" sx={{ pt: 16 }}>
       <Box pb={6} textAlign="center">
         <Typography
           sx={{ fontSize: { xs: 25, sm: 30, md: 40, lg: 45 } }}
@@ -32,25 +32,27 @@ const Donor = () => {
 
       <Grid container spacing={4}>
         {allDonor?.map((donor: any) => (
-          <Grid key={donor?.id} item xs={12} sm={12} md={6}>
+          <Grid key={donor?.id} item xs={12} sm={6} md={4} lg={3}>
             <Card
               sx={{
                 display: "flex",
-                flexDirection: { xs: "column", md: "row" },
+                flexDirection: "column",
                 alignItems: "stretch",
                 boxShadow: 3,
                 borderRadius: 2,
                 overflow: "hidden",
-                transition: "transform 0.3s ease",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
                 "&:hover": {
                   transform: "translateY(-5px)",
+                  boxShadow: 6,
                 },
+                height: "100%",
               }}
             >
               <Box
                 sx={{
-                  width: { xs: "100%", md: 200 },
-                  height: { xs: 200, md: 160 },
+                  width: "100%",
+                  height: 220, // Set a fixed height for the image section
                   position: "relative",
                   flexShrink: 0,
                 }}
@@ -61,59 +63,58 @@ const Donor = () => {
                     "https://i.postimg.cc/43gT3HP6/pngtree-user-icon-isolated-on-abstract-background-png-image-5192004.jpg"
                   }
                   alt="donorImage"
-                  width={500}
-                  height={400}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
+                  layout="fill"
+                  objectFit="cover" // Ensure the image covers the box proportionally
+                  priority
                 />
               </Box>
 
               <CardContent
                 sx={{
                   flex: 1,
+                  padding: 3,
                   textAlign: "left",
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "center",
+                  justifyContent: "space-between",
+                  backgroundColor: "#f9f9f9", // Add a background color for better readability
                 }}
               >
-                <Typography variant="h6">
-                  Name:{" "}
-                  <Box color="text.secondary" component="span">
-                    {donor?.name}
-                  </Box>
+                <Typography variant="h6" fontWeight={600} color="primary">
+                  {donor?.name}
                 </Typography>
-                <Typography variant="h6">
+                <Typography variant="body1" color="text.secondary">
                   Blood Type:{" "}
-                  <Box color="text.secondary" component="span">
+                  <Box color="text.primary" component="span">
                     {donor?.bloodType}
                   </Box>
                 </Typography>
-                <Typography variant="h6">
+                <Typography variant="body1" color="text.secondary">
                   Availability:{" "}
-                  <Box color="text.secondary" component="span">
+                  <Box color={donor?.availability ? "green" : "red"} component="span">
                     {donor?.availability ? "Available" : "Unavailable"}
                   </Box>
                 </Typography>
-                <Typography variant="h6">
+                <Typography variant="body1" color="text.secondary">
                   Location:{" "}
-                  <Box color="text.secondary" component="span">
+                  <Box color="text.primary" component="span">
                     {donor?.location}
                   </Box>
                 </Typography>
 
-                <Box mt={2}>
+                <Box mt={2} textAlign="center">
                   <Link href={`/donor/${donor.id}`} passHref>
                     <Button
                       variant="contained"
                       sx={{
                         textTransform: "none",
                         px: 3,
-                        py: 1,
+                        py: 1.5,
                         fontSize: 16,
+                        backgroundColor: "#d32f2f", // Red button
+                        "&:hover": {
+                          backgroundColor: "#c62828", // Darker red on hover
+                        },
                       }}
                     >
                       More

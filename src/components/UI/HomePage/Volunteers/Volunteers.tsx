@@ -42,7 +42,7 @@ const volunteersData = [
 
 const Volunteers = () => {
   return (
-    <Box sx={{ background: "#F9FAFB", py: 16 }}>
+    <Box sx={{  py: 16 }}>
       <Container>
         <Box textAlign="center" pb={8}>
           <Typography
