@@ -112,6 +112,15 @@ function ResponsiveAppBar() {
                     PROFILE
                   </Typography>
                 )}
+                {userRole && (
+                  <Typography
+                    component={Link}
+                    href={`/dashboard/${userRole}`}
+                    fontWeight={600}
+                  >
+                    DASHBOARD
+                  </Typography>
+                )}
               </Stack>
             </Menu>
           </Box>
@@ -140,6 +149,14 @@ function ResponsiveAppBar() {
               >
                 ABOUT
               </Typography>
+              <Typography
+                color="white"
+                component={Link}
+                href="/serviceprovided"
+                fontWeight={600}
+              >
+                SERVICE
+              </Typography>
 
               {userRole && (
                 <Typography
@@ -151,6 +168,16 @@ function ResponsiveAppBar() {
                   PROFILE
                 </Typography>
               )}
+               {userRole && (
+                  <Typography
+                  color="white"
+                    component={Link}
+                    href={`/dashboard/${userRole}`}
+                    fontWeight={600}
+                  >
+                    DASHBOARD
+                  </Typography>
+                )}
             </Stack>
           </Box>
 
