@@ -8,7 +8,9 @@ import Rating from "@mui/material/Rating";
 
 const Review = () => {
   const { data } = useGetAllReviewQuery({});
-  const reviewData = data?.review || [];
+
+  const approvedReview = data?.review.filter((review: any) => review?.status === 'APPROVED')
+  const reviewData = approvedReview || [];
 
   return (
     <Box sx={{ background: "#1B373B", color: "white", py: 18 }}>
