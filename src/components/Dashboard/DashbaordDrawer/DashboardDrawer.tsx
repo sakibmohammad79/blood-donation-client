@@ -89,11 +89,11 @@ export default function DashboardDrawer({
             </Box>
 
             <Stack direction="row" gap={3}>
-              <Badge badgeContent={1} color="primary">
+              {/* <Badge badgeContent={1} color="primary">
                 <IconButton sx={{ background: "white" }}>
                   <NotificationsNoneIcon color="action" />
                 </IconButton>
-              </Badge>
+              </Badge> */}
               <Tooltip title={user?.name}>
                 <Avatar
                   alt={user?.name}
