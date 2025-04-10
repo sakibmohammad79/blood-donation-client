@@ -25,7 +25,21 @@ export const reviewApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.review],
     }),
+    deleteReview: build.mutation({
+      query: (id) => ({
+        url: `/review/delete-review/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.review],
+    }),
+    approvedReview: build.mutation({
+      query: (id) => ({
+        url: `/review/approved-review/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: [tagTypes.review],
+    }),
   }),
 });
 
-export const { useGetAllReviewQuery, useGiveReviewMutation } = reviewApi;
+export const { useGetAllReviewQuery, useGiveReviewMutation, useDeleteReviewMutation, useApprovedReviewMutation } = reviewApi;

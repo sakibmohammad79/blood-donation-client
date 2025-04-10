@@ -1,44 +1,40 @@
 "use client";
-import {
-  useDeleteDonorMutation,
-  useDonorStatusUpdateMutation,
-  useGetAllDonorsQuery,
-} from "@/redux/api/donorApi";
+import { Chip } from "@mui/material";
 import { Box, IconButton, MenuItem, Select, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import DonorUpdateModal from "../../donor/profile/components/DonorUpdateModal";
 import { toast } from "sonner";
-import { useGetAllReviewQuery } from "@/redux/api/reviewApi";
+import { useApprovedReviewMutation, useDeleteReviewMutation, useGetAllReviewQuery } from "@/redux/api/reviewApi";
 
-const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
+
 
 const ManageReview = () => {
   const [isModalOpen, SetIsModalOpen] = React.useState(false);
   const [id, setId] = React.useState("");
 
   const { data: reviews, isLoading, isError } = useGetAllReviewQuery({});
-  // const [donorStatusUpdate] = useDonorStatusUpdateMutation();
+   const [approvedReview] = useApprovedReviewMutation();
 
-  // const handleStatusChange = async (id: string, value: string) => {
-  //   await donorStatusUpdate({ id, value });
-  // };
+  const handleStatusChange = async (id: string) => {
+    await approvedReview(id);
+  };
 
-  // const [deleteDonor] = useDeleteDonorMutation();
+  const [deleteReview] = useDeleteReviewMutation();
 
-  // const handleDonorDelete = async (id: string) => {
-  //   try {
-  //     const res = await deleteDonor(id).unwrap();
-  //     if (res?.id) {
-  //       toast.success("Donor deleted successfully!");
-  //     }
-  //   } catch (err: any) {
-  //     console.log(err.message);
-  //   }
-  // };
+  const handleReviewDelete = async (id: string) => {
+    console.log(id, "id");
+    try {
+      const res = await deleteReview(id).unwrap();
+      console.log(res);
+      if (res?.id) {
+        toast.success("Review deleted successfully!");
+      }
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
 
   if (reviews?.review?.length < 0) {
     return (
@@ -59,66 +55,51 @@ const ManageReview = () => {
   const rows =
     reviews?.review || [];
 
-  // const handleGetIdAndModalOpen = (id: string) => {
-  //   setId(id);
-  //   SetIsModalOpen(true);
-  // };
+  
 
-  const columns: GridColDef[] = [
-    { field: "name", headerName: "Name", flex: 1 },
-    { field: "rating", headerName: "Rating", flex: 1 },
-    { field: "details", headerName: "Feedback", flex: 3 },
-    { field: "status", headerName: "status", flex: 1 },
-    { field: "createdAt", headerName: "Date", flex: 1 },
-    // {
-    //   field: "status",
-    //   headerName: "Status",
-    //   width: 150,
-    //   renderCell: (params) => (
-    //     <Select
-    //       sx={{ width: "150px" }}
-    //       value={params.row.status}
-    //       // onChange={(event) =>
-    //       //   handleStatusChange(params.row.id, event.target.value)
-    //       // }
-    //     >
-    //       {allowedStatuses.map((status) => (
-    //         <MenuItem key={status} value={status}>
-    //           {status}
-    //         </MenuItem>
-    //       ))}
-    //     </Select>
-    //   ),
-    // },
-    {
-      field: "action",
-      headerName: "Action",
-      flex: 1,
-      renderCell: ({ row }) => (
-        <Box>
-          <IconButton>
-            <EditIcon
-              fontSize="medium"
-              style={{ color: "green" }}
-              // onClick={() => handleGetIdAndModalOpen(row?.id)}
-            ></EditIcon>
-            <DonorUpdateModal
-              id={id}
-              open={isModalOpen}
-              setOpen={SetIsModalOpen}
-            ></DonorUpdateModal>
-          </IconButton>
-          <IconButton>
-            <DeleteIcon
-              // onClick={() => handleDonorDelete(row.id)}
-              style={{ color: "red" }}
-              fontSize="medium"
-            ></DeleteIcon>
-          </IconButton>
-        </Box>
-      ),
-    },
-  ];
+    const columns: GridColDef[] = [
+      { field: "name", headerName: "Name", flex: 1 },
+      { field: "rating", headerName: "Rating", flex: 1 },
+      { field: "details", headerName: "Feedback", flex: 3 },
+      {
+        field: "status",
+        headerName: "Status",
+        flex: 1,
+        renderCell: ({ row }) => {
+          if (row.status === "APPROVED") {
+            return <Chip label="Approved" color="success" />;
+          }
+          if (row.status === "PENDING") {
+            return (
+              <Chip
+                label="Approve"
+                clickable
+                color="warning"
+                onClick={() => handleStatusChange(row?.id,)}
+              />
+            );
+          }
+          return <Chip label={row.status} />;
+        },
+      },
+      { field: "createdAt", headerName: "Date", flex: 1 },
+      {
+        field: "action",
+        headerName: "Action",
+        flex: 1,
+        renderCell: ({ row }) => (
+          <Box>
+            <IconButton>
+              <DeleteIcon
+                onClick={() => handleReviewDelete(row.id)}
+                style={{ color: "red" }}
+                fontSize="medium"
+              />
+            </IconButton>
+          </Box>
+        ),
+      },
+    ];
   return (
     <Box>
       {isLoading ? (
