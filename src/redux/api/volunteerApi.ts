@@ -25,7 +25,7 @@ const volunteerApi = baseApi.injectEndpoints({
           meta,
         };
       },
-      providesTags: [tagTypes.admin],
+      providesTags: [tagTypes.volunteer],
     }),
     // getSingleAdmin: build.query({
     //   query: (id) => ({
@@ -49,17 +49,18 @@ const volunteerApi = baseApi.injectEndpoints({
     //   }),
     //   invalidatesTags: [tagTypes.admin, tagTypes.user],
     // }),
-    // deleteAdmin: build.mutation({
-    //   query: (id) => ({
-    //     url: `/admin/soft-delete/${id}`,
-    //     method: "PATCH",
-    //   }),
-    //   invalidatesTags: [tagTypes.admin, tagTypes.user],
-    // }),
+    deleteVolunteer: build.mutation({
+      query: (id) => ({
+        url: `/volunteer/delete-volunteer/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.volunteer],
+    }),
   }),
 });
 
 export const {
   useCreateVolunteerMutation,
-  useGetAllVolunteerQuery
+  useGetAllVolunteerQuery,
+ useDeleteVolunteerMutation
 } = volunteerApi;

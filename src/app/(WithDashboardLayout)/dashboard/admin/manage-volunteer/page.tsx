@@ -23,7 +23,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AdminUPdateModal from "../profile/components/AdminUpdateModal";
 import { toast } from "sonner";
 import CreateVolunteerModal from "./components/createVolunteerModal";
-import { useGetAllVolunteerQuery } from "@/redux/api/volunteerApi";
+import { useDeleteVolunteerMutation, useGetAllVolunteerQuery } from "@/redux/api/volunteerApi";
 
 
 const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
@@ -42,15 +42,15 @@ const ManageVolunteer = () => {
 //     await adminStatusUpdate({ id, value });
 //   };
 
-//   const [deleteAdmin] = useDeleteAdminMutation();
+  const [deleteVolunteer] = useDeleteVolunteerMutation();
 
-//   const handleAdminDelete = async (id: string) => {
-//     const res = await deleteAdmin(id).unwrap();
+  const handleVolunteerDelete = async (id: string) => {
+    const res = await deleteVolunteer(id).unwrap();
 
-//     if (res?.id) {
-//       toast.success("Admin deleted successfully!");
-//     }
-//   };
+    if (res?.id) {
+      toast.success("Volunteer deleted successfully!");
+    }
+  };
 
   if (volunteers?.volunteer?.length < 0) {
     return (
@@ -68,10 +68,7 @@ const ManageVolunteer = () => {
     );
   }
 
-//   const handleGetIdAndOpenUpdateModal = (id: string) => {
-//     setAdminUpdateId(id);
-//     setIsModalOpen(true);
-//   };
+
 
   const rows = volunteers?.volunteer || [];
 
@@ -91,7 +88,7 @@ const ManageVolunteer = () => {
           </IconButton>
           <IconButton>
             <DeleteIcon
-            //   onClick={() => handleAdminDelete(row.id)}
+              onClick={() => handleVolunteerDelete(row.id)}
               fontSize="medium"
               style={{ color: "red" }}
             ></DeleteIcon>
