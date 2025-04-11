@@ -102,6 +102,9 @@ function ResponsiveAppBar() {
                 <Typography component={Link}    href="/all-volunteer" fontWeight={600}>
                   OUR VOLUNTEER
                 </Typography>
+                <Typography component={Link}    href="/about-us" fontWeight={600}>
+                  ABOUT US
+                </Typography>
 
                 {userRole && (
                   <Typography
@@ -156,6 +159,14 @@ function ResponsiveAppBar() {
                 fontWeight={600}
               >
                 SERVICE
+              </Typography>
+              <Typography
+                color="white"
+                component={Link}
+                href="/about-us"
+                fontWeight={600}
+              >
+                ABOUT US
               </Typography>
 
               {userRole && (

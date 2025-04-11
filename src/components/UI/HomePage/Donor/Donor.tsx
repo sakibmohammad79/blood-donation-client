@@ -52,7 +52,7 @@ const Donor = () => {
               <Box
                 sx={{
                   width: "100%",
-                  height: 250, // Set a fixed height for the image section
+                  height: 350, // Set a fixed height for the image section
                   position: "relative",
                   flexShrink: 0,
                 }}
