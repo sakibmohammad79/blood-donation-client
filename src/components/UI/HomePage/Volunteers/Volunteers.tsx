@@ -21,7 +21,7 @@ import { useGetAllVolunteerQuery } from "@/redux/api/volunteerApi";
 const Volunteers = () => {
   const { data: volunteers, isLoading } = useGetAllVolunteerQuery({});
   const volunteerData = volunteers?.volunteer;
-  const activeVolunteerData = volunteerData?.filter((volunteer: any) => volunteer.isActive);
+  // const activeVolunteerData = volunteerData?.filter((volunteer: any) => volunteer.isActive);
 
   return (
     <Box sx={{ py: 16 }}>
@@ -48,7 +48,7 @@ const Volunteers = () => {
               </Grid>
             ))
           ) : (
-            activeVolunteerData?.map((volunteer: any) => (
+            volunteerData?.map((volunteer: any) => (
               <Grid item key={volunteer.id} xs={12} sm={6} md={6} lg={4}>
                 <Card
                   sx={{

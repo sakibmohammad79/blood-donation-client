@@ -17,7 +17,7 @@ const AllDonorPage = () => {
   const allDonor = data?.donor;
 
   return (
-    <Container maxWidth="xl" sx={{ pt: 16 }}>
+    <Container maxWidth="xl" sx={{ py: 12 }}>
       <Box pb={6} textAlign="center">
         <Typography
           sx={{ fontSize: { xs: 25, sm: 30, md: 40, lg: 45 } }}
