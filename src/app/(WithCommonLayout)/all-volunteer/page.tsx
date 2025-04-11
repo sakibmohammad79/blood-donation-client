@@ -117,17 +117,7 @@ const Volunteers = () => {
         </Grid>
 
         {/* View More Button */}
-        <Box textAlign="center" mt={6}>
-          <Link href="/volunteers">
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ px: 6, py: 1.5, fontWeight: 600, fontSize: 16 }}
-            >
-              View More
-            </Button>
-          </Link>
-        </Box>
+        
       </Container>
     </Box>
   );

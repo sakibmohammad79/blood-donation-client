@@ -99,8 +99,8 @@ function ResponsiveAppBar() {
                 <Typography component={Link} href="/" fontWeight={600}>
                   HOME
                 </Typography>
-                <Typography component={Link} href="/about" fontWeight={600}>
-                  ABOUT
+                <Typography component={Link}    href="/all-volunteer" fontWeight={600}>
+                  OUR VOLUNTEER
                 </Typography>
 
                 {userRole && (
@@ -144,10 +144,10 @@ function ResponsiveAppBar() {
               <Typography
                 color="white"
                 component={Link}
-                href="/about"
+                href="/all-volunteer"
                 fontWeight={600}
               >
-                ABOUT
+                OUR VOLUNTEER
               </Typography>
               <Typography
                 color="white"
