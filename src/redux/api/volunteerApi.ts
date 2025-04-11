@@ -41,14 +41,20 @@ const volunteerApi = baseApi.injectEndpoints({
     //   }),
     //   invalidatesTags: [tagTypes.user, tagTypes.admin],
     // }),
-    // adminUpdate: build.mutation({
-    //   query: (data) => ({
-    //     url: `/admin/${data.id}`,
-    //     method: "PATCH",
-    //     data: data.body,
-    //   }),
-    //   invalidatesTags: [tagTypes.admin, tagTypes.user],
-    // }),
+    activeVolunteer: build.mutation({
+      query: (id) => ({
+        url: `/volunteer/active-volunteer/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: [tagTypes.volunteer],
+    }),
+    inactiveVolunteer: build.mutation({
+      query: (id) => ({
+        url: `/volunteer/inactive-volunteer/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: [tagTypes.volunteer],
+    }),
     deleteVolunteer: build.mutation({
       query: (id) => ({
         url: `/volunteer/delete-volunteer/${id}`,
@@ -62,5 +68,7 @@ const volunteerApi = baseApi.injectEndpoints({
 export const {
   useCreateVolunteerMutation,
   useGetAllVolunteerQuery,
- useDeleteVolunteerMutation
+ useDeleteVolunteerMutation,
+ useActiveVolunteerMutation,
+ useInactiveVolunteerMutation
 } = volunteerApi;

@@ -3,11 +3,13 @@
 import {
   Box,
   Button,
+  Chip,
   IconButton,
   MenuItem,
   Select,
   Stack,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -23,24 +25,19 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AdminUPdateModal from "../profile/components/AdminUpdateModal";
 import { toast } from "sonner";
 import CreateVolunteerModal from "./components/createVolunteerModal";
-import { useDeleteVolunteerMutation, useGetAllVolunteerQuery } from "@/redux/api/volunteerApi";
+import { useActiveVolunteerMutation, useDeleteVolunteerMutation, useGetAllVolunteerQuery, useInactiveVolunteerMutation } from "@/redux/api/volunteerApi";
 
 
 const allowedStatuses = ["ACTIVE", "BLOCKED", "DELETED"];
 
 const ManageVolunteer = () => {
   const [isAdminModalOpen, setIsAdminModalOpen] = React.useState(false);
-
-//   //update admin
-//   const [isModalOpen, setIsModalOpen] = React.useState(false);
-//   const [isAdminUpdateId, setAdminUpdateId] = React.useState("");
-
   const { data: volunteers, isLoading, isError } = useGetAllVolunteerQuery({});
-//   const [adminStatusUpdate] = useAdminStatusUpdateMutation();
+  const [activeVolunteer] = useActiveVolunteerMutation();
+  const [inactiveVolunteer] = useInactiveVolunteerMutation();
 
-//   const handleStatusChange = async (id: string, value: string) => {
-//     await adminStatusUpdate({ id, value });
-//   };
+ 
+
 
   const [deleteVolunteer] = useDeleteVolunteerMutation();
 
@@ -51,6 +48,31 @@ const ManageVolunteer = () => {
       toast.success("Volunteer deleted successfully!");
     }
   };
+
+  const handleActiveVolunteer = async (id: string) => {
+    try {
+      const res = await activeVolunteer(id).unwrap();
+      if (res?.id) {
+        toast.success("Volunteer activated successfully!");
+      }
+    } catch (err) {
+      toast.error("Failed to activate volunteer.");
+      console.error(err);
+    }
+  };
+  
+  const handleInactiveVolunteer = async (id: string) => {
+    try {
+      const res = await inactiveVolunteer(id).unwrap();
+      if (res?.id) {
+        toast.success("Volunteer deactivated successfully!");
+      }
+    } catch (err) {
+      toast.error("Failed to deactivate volunteer.");
+      console.error(err);
+    }
+  };
+  
 
   if (volunteers?.volunteer?.length < 0) {
     return (
@@ -75,7 +97,44 @@ const ManageVolunteer = () => {
   const columns: GridColDef[] = [
     { field: "name", headerName: "Name", flex: 1 },
     { field: "email", headerName: "Email", flex: 1 },
-    { field: "isActive", headerName: "Active Status",flex: 1 },
+    {
+      field: "isActive",
+      headerName: "Status",
+      flex: 1,
+      renderCell: ({ row }) => (
+        <Tooltip
+          title={
+            row.isActive
+              ? "Click to make volunteer inactive"
+              : "Click to make volunteer active"
+          }
+          arrow
+        >
+          <Chip
+            label={row.isActive ? "Inactive" : "Active"}
+            onClick={() =>
+              row.isActive
+                ? handleInactiveVolunteer(row.id)
+                : handleActiveVolunteer(row.id)
+            }
+            sx={{
+              cursor: "pointer",
+              backgroundColor: row.isActive ? "#f44336" : "#4caf50", // red/green
+              color: "#fff",
+              fontWeight: 500,
+              fontSize: "0.75rem",
+              px: 1.5,
+              py: 0.5,
+              borderRadius: "8px",
+              '&:hover': {
+                opacity: 0.9,
+              },
+            }}
+          />
+        </Tooltip>
+      ),
+    },
+
     { field: "location", headerName: "Location", flex: 1 },
     { field: "contactNumber", headerName: "Contact Number", flex: 1 },
     {
@@ -84,14 +143,9 @@ const ManageVolunteer = () => {
       flex: 1,
       renderCell: ({ row }) => (
         <Box>
-          <IconButton>
-          </IconButton>
-          <IconButton>
-            <DeleteIcon
-              onClick={() => handleVolunteerDelete(row.id)}
-              fontSize="medium"
-              style={{ color: "red" }}
-            ></DeleteIcon>
+         
+          <IconButton onClick={() => handleVolunteerDelete(row.id)}>
+            <DeleteIcon fontSize="medium" style={{ color: "red" }} />
           </IconButton>
         </Box>
       ),
