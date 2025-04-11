@@ -44,6 +44,11 @@ export const drawerItems = (role: UserRole) => {
           icon: AdminPanelSettingsIcon,
         },
         {
+          title: "Manage Volunteer",
+          path: `${role}/manage-volunteer`,
+          icon: AdminPanelSettingsIcon,
+        },
+        {
           title: "Manage Review",
           path: `${role}/manage-review`,
           icon: SettingsSuggestIcon,
