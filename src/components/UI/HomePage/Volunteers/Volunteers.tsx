@@ -118,7 +118,7 @@ const Volunteers = () => {
 
         {/* View More Button */}
         <Box textAlign="center" mt={6}>
-          <Link href="/volunteers">
+          <Link href="/all-volunteer">
             <Button
               variant="contained"
               color="primary"

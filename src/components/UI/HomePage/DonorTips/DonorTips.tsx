@@ -65,9 +65,14 @@ const DonationTips = () => {
   return (
     <Container>
     <Box  pb={8} textAlign="center">
-      <Typography variant="h4" gutterBottom>
-        Donation Tips
-      </Typography>
+    <Typography
+            sx={{
+              fontSize: { xs: 25, sm: 30, md: 35, lg: 45 },
+            }}
+            fontWeight={600}
+          >
+          DONATION TIPS
+          </Typography>
       <Typography variant="body1" gutterBottom>
         Here are some helpful tips to ensure a smooth and positive blood
         donation experience.

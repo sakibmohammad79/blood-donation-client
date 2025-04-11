@@ -5,9 +5,7 @@ export const theme = createTheme({
     primary: {
       main: "#EA062B",
     },
-    // secondary: {
-    //   main: green[500],
-    // },
+  
   },
   components: {
     MuiButton: {
@@ -31,6 +29,7 @@ export const theme = createTheme({
     body1: {
       color: "#0B1134CC",
     },
+    fontFamily: "var(--font-poppins), sans-serif",
   },
 });
 

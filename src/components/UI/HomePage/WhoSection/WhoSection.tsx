@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Box,
   Container,
@@ -6,66 +7,68 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  Divider,
 } from "@mui/material";
 import Image from "next/image";
 import aboutImage from "../../../../assets/landing_page/about_image.webp";
 
 const WhoSection = () => {
   const theme = useTheme();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg")); // Detect large screens
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
   return (
     <Container maxWidth="xl">
-      <Box sx={{ py: { xs: 10, sm: 10, md: 10, lg: 16, xl: 16 } }}>
-        <Grid container spacing={4} alignItems="stretch">
+      <Box sx={{ py: { xs: 10, sm: 12, md: 14 } }}>
+        <Grid container spacing={8} alignItems="center">
           {/* Text Content */}
           <Grid item xs={12} md={6}>
             <Box
               sx={{
-                background: "#F9FAFB",
-                borderRadius: 2,
-                boxShadow: 3,
-                padding: 4,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center", // Vertically center the content
-                height: "100%", // Ensure it stretches the full height
+                border: "1px solid #e0e0e0",
+                borderRadius: "16px",
+                boxShadow: "0px 8px 24px rgba(0,0,0,0.05)",
+                p: { xs: 3, sm: 4 },
               }}
             >
-              <Typography
-                variant="h4"
-                component="h4"
-                fontWeight={600}
-                gutterBottom
-                align={isLargeScreen ? "left" : "center"} // Adjust alignment based on screen size
-              >
-                Who We Are?
-              </Typography>
+               <Typography
+            sx={{
+              fontSize: { xs: 25, sm: 30, md: 35, lg: 40 },
+            }}
+            fontWeight={600}
+          >
+           WHO WE ARE..?
+          </Typography>
               <Typography
                 variant="h6"
-                component="h6"
+                color="text.secondary"
                 paragraph
                 align={isLargeScreen ? "left" : "center"}
               >
-                Blood Buddies is a public donation center with blood donation
-                members in the changing health care system.
+                Blood Buddies is a public donation center with members committed
+                to transforming healthcare through life-saving blood donations.
               </Typography>
-              <Box>
-                <Typography component="p" py={1} align={isLargeScreen ? "left" : "center"}>
-                  The extra care of a multi-disciplinary team.
-                </Typography>
-                <Typography component="p" align={isLargeScreen ? "left" : "center"}>
-                  Examine critically to ensure alignment.
-                </Typography>
-                <Typography component="p" py={1} align={isLargeScreen ? "left" : "center"}>
-                  High quality assessment, diagnosis, and treatment.
-                </Typography>
-                <Typography component="p" align={isLargeScreen ? "left" : "center"}>
-                  Increasing communication with our members.
-                </Typography>
-                <Typography component="p" py={1} align={isLargeScreen ? "left" : "center"}>
-                  Specialist blood donors and clinical supervision.
-                </Typography>
+
+              <Divider sx={{ my: 2, maxWidth: 100, mx: isLargeScreen ? 0 : "auto" }} />
+
+              <Box component="ul" sx={{ pl: 2, color: "#555", lineHeight: 1.8 }}>
+                {[
+                  "Multi-disciplinary team with extra care",
+                  "Critical examination for better alignment",
+                  "Top-quality assessment & treatment",
+                  "Improved communication with our members",
+                  "Supervised by clinical experts & specialist donors",
+                ].map((point, index) => (
+                  <li key={index}>
+                    <Typography
+                      variant="body1"
+                      component="span"
+                      color="text.primary"
+                      align={isLargeScreen ? "left" : "center"}
+                    >
+                      {point}
+                    </Typography>
+                  </li>
+                ))}
               </Box>
             </Box>
           </Grid>
@@ -74,34 +77,25 @@ const WhoSection = () => {
           <Grid item xs={12} md={6}>
             <Box
               sx={{
-                // boxShadow: 3,
-                borderRadius: 2,
-                height: "100%", // Match height of the text content
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                
+                borderRadius: "16px",
+                boxShadow: "0px 10px 30px rgba(0,0,0,0.08)",
+                overflow: "hidden",
+                maxWidth: "600px",
+                mx: "auto",
               }}
             >
-              <Box
-                sx={{
-                  width: "100%",
-                  maxWidth: 600, // Ensure the image doesn't stretch too much
-                  height: "auto",
-                  borderRadius: 2, // Add rounded corners to the image
-                  overflow: "hidden",
+              <Image
+                src={aboutImage}
+                alt="About us"
+                layout="responsive"
+                objectFit="cover"
+                style={{
+                  borderRadius: "16px",
                 }}
-              >
-                <Image
-                  src={aboutImage}
-                  alt="About us"
-                  layout="responsive"
-                  objectFit="contain"
-                  style={{
-                    borderRadius: "8px", // Optional for rounded corners
-                  }}
-                />
-              </Box>
+              />
             </Box>
           </Grid>
         </Grid>
