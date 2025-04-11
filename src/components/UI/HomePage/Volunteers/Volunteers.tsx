@@ -21,8 +21,7 @@ import { useGetAllVolunteerQuery } from "@/redux/api/volunteerApi";
 const Volunteers = () => {
   const { data: volunteers, isLoading } = useGetAllVolunteerQuery({});
   const volunteerData = volunteers?.volunteer;
-
-  const activeVolunteerData = volunteerData.filter((volunteer: any) => volunteer.isActive)
+  const activeVolunteerData = volunteerData?.filter((volunteer: any) => volunteer.isActive);
 
   return (
     <Box sx={{ py: 16 }}>
