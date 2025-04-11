@@ -5,24 +5,13 @@ import {
   Button,
   Chip,
   IconButton,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
   Tooltip,
   Typography,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import {
-  useAdminStatusUpdateMutation,
-  useDeleteAdminMutation,
-  useGetAllAdminQuery,
-} from "@/redux/api/adminApi";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AdminUPdateModal from "../profile/components/AdminUpdateModal";
 import { toast } from "sonner";
 import CreateVolunteerModal from "./components/createVolunteerModal";
 import { useActiveVolunteerMutation, useDeleteVolunteerMutation, useGetAllVolunteerQuery, useInactiveVolunteerMutation } from "@/redux/api/volunteerApi";
@@ -154,7 +143,7 @@ const ManageVolunteer = () => {
   return (
     <Box>
       <Box>
-        <Button onClick={() => setIsAdminModalOpen(true)}>Create Admin</Button>
+        <Button onClick={() => setIsAdminModalOpen(true)}>Create Volunteer</Button>
         <CreateVolunteerModal
           open={isAdminModalOpen}
           setOpen={setIsAdminModalOpen}

@@ -9,6 +9,8 @@ import CallReceivedIcon from "@mui/icons-material/CallReceived";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import StarIcon from "@mui/icons-material/Star";
+import CollectionsIcon from '@mui/icons-material/Collections';
+import AssistWalkerIcon from '@mui/icons-material/AssistWalker';
 
 export const drawerItems = (role: UserRole) => {
   const roleMenus: DrawerItems[] = [];
@@ -46,12 +48,17 @@ export const drawerItems = (role: UserRole) => {
         {
           title: "Manage Volunteer",
           path: `${role}/manage-volunteer`,
-          icon: AdminPanelSettingsIcon,
+          icon: AssistWalkerIcon,
         },
         {
           title: "Manage Review",
           path: `${role}/manage-review`,
           icon: SettingsSuggestIcon,
+        },
+        {
+          title: "Create Gallery",
+          path: `${role}/create-gallery`,
+          icon: CollectionsIcon,
         }
       );
       break;

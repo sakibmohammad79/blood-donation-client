@@ -27,20 +27,6 @@ const volunteerApi = baseApi.injectEndpoints({
       },
       providesTags: [tagTypes.volunteer],
     }),
-    // getSingleAdmin: build.query({
-    //   query: (id) => ({
-    //     url: `/admin/${id}`,
-    //     method: "GET",
-    //   }),
-    //   providesTags: [tagTypes.admin],
-    // }),
-    // adminStatusUpdate: build.mutation({
-    //   query: (data: any) => ({
-    //     url: `/admin/status/${data.id}?status=${data.value}`,
-    //     method: "PATCH",
-    //   }),
-    //   invalidatesTags: [tagTypes.user, tagTypes.admin],
-    // }),
     activeVolunteer: build.mutation({
       query: (id) => ({
         url: `/volunteer/active-volunteer/${id}`,
