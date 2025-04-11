@@ -13,24 +13,25 @@ const galleryApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.gallery],
     }),
-    getAllVolunteer: build.query({
+    getAllGallery: build.query({
       query: (arg: Record<string, any>) => ({
-        url: "/volunteer",
+        url: "/gallery",
         method: "GET",
         params: arg,
       }),
       transformResponse: (response: any, meta: TMeta) => {
         return {
-          volunteer: response,
+          gallery: response,
           meta,
         };
       },
-      providesTags: [tagTypes.volunteer],
+      providesTags: [tagTypes.gallery],
     }),
    
   }),
 });
 
 export const {
- useCreateGalleryMutation
+ useCreateGalleryMutation,
+ useGetAllGalleryQuery
 } = galleryApi;

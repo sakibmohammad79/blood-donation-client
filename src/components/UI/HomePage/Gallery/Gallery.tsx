@@ -1,21 +1,11 @@
-import galleryImage1 from "@/assets/landing_page/gallery/gallery_1.jpg";
-import galleryImage2 from "@/assets/landing_page/gallery/gallery_2.jpg";
-import galleryImage3 from "@/assets/landing_page/gallery/gallery_3.jpg";
-import galleryImage4 from "@/assets/landing_page/gallery/gallery_4.jpg";
-import galleryImage5 from "@/assets/landing_page/gallery/gallery_5.jpg";
-import galleryImage6 from "@/assets/landing_page/gallery/gallery_6.jpg";
+"use client";
+import { useGetAllGalleryQuery } from "@/redux/api/galleryApi";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 
 const Gallery = () => {
-  const images = [
-    galleryImage1,
-    galleryImage2,
-    galleryImage3,
-    galleryImage4,
-    galleryImage5,
-    galleryImage6,
-  ];
+  const { data: galleries } = useGetAllGalleryQuery({});
+  const galleryItems = galleries?.gallery || [];
 
   return (
     <Container>
@@ -28,29 +18,60 @@ const Gallery = () => {
         >
           CAMPAIGN GALLERY
         </Typography>
-        <Typography>
+        <Typography color="text.secondary">
           Our prestigious voluntary work on campaigns by the team
         </Typography>
       </Box>
+
       <Box>
-        <Grid container spacing={2} px={2}>
-          {images.map((image, index) => (
-            <Grid item xs={12} sm={12} md={6} lg={4} key={index}>
+        <Grid container spacing={3}>
+          {galleryItems.map((item: any, index: number) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
               <Box
                 sx={{
                   position: "relative",
-                  width: "100%",
                   height: 300,
                   overflow: "hidden",
-                  borderRadius: 2,
+                  borderRadius: 3,
+                  boxShadow: 3,
+                  cursor: "pointer",
+                  "&:hover .overlay": {
+                    opacity: 1,
+                    transform: "translateY(0)",
+                  },
+                  "&:hover img": {
+                    transform: "scale(1.05)",
+                  },
                 }}
               >
                 <Image
-                  src={image}
-                  alt={`Gallery Image ${index + 1}`}
+                  src={item.imageUrl}
+                  alt={item.title}
                   fill
-                  style={{ objectFit: "cover" }}
+                  style={{
+                    objectFit: "cover",
+                    transition: "transform 0.4s ease",
+                  }}
                 />
+                <Box
+                  className="overlay"
+                  sx={{
+                    position: "absolute",
+                    bottom: 0,
+                    width: "100%",
+                    bgcolor: "rgba(0, 0, 0, 0.6)",
+                    color: "#fff",
+                    py: 1,
+                    px: 2,
+                    opacity: 0,
+                    transform: "translateY(100%)",
+                    transition: "all 0.4s ease",
+                  }}
+                >
+                  <Typography variant="subtitle1" fontWeight={600}>
+                    {item.title}
+                  </Typography>
+                </Box>
               </Box>
             </Grid>
           ))}
