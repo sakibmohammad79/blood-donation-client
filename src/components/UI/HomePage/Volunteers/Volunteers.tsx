@@ -22,6 +22,8 @@ const Volunteers = () => {
   const { data: volunteers, isLoading } = useGetAllVolunteerQuery({});
   const volunteerData = volunteers?.volunteer;
 
+  const activeVolunteerData = volunteerData.filter((volunteer: any) => volunteer.isActive == true);
+
   return (
     <Box sx={{ py: 16 }}>
       <Container>
@@ -47,7 +49,7 @@ const Volunteers = () => {
               </Grid>
             ))
           ) : (
-            volunteerData?.map((volunteer: any) => (
+            activeVolunteerData?.map((volunteer: any) => (
               <Grid item key={volunteer.id} xs={12} sm={6} md={6} lg={4}>
                 <Card
                   sx={{
