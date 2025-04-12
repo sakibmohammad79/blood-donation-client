@@ -43,7 +43,7 @@ console.log( approved);
         fontWeight={700}
         sx={{ fontSize: { xs: 24, md: 30, lg: 36 }, mb: 4 }}
       >
-        🩸 Admin Dashboard Overview
+        🩸 Dashboard Overview
       </Typography>
 
       <Grid container spacing={3}>
